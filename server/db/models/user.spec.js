@@ -22,7 +22,7 @@ describe('User model', () => {
           streetAddress: '123 Pine St.',
           city: 'New York',
           state: 'NY',
-          zip: '10024',
+          zip: '10024'
         })
       })
 
