@@ -2,9 +2,97 @@ const db = require("./server/db/db");
 const Product = require("./server/db/models/product");
 const User = require("./server/db/models/user");
 
-const products = [
-  {}
-];
+const products = [{
+  name: 'Cheetos',
+  price: 500,
+  inventory: 10,
+  description: 'You know what Cheetos are.',
+  category: 'chips'
+}, {
+  name: 'Freetos',
+  price: 500,
+  inventory: 10,
+  description: 'These are Freetos. (Note: these are not Cheetos)',
+  category: 'chips'
+}, {
+  name: 'Oreos',
+  price: 1000,
+  inventory: 5,
+  description: 'Chocolate cookies surround a wonderful, creamy center.',
+  category: 'cookies'
+}, {
+  name: 'Ring-Pop',
+  price: 100,
+  inventory: 100,
+  description: 'This 90s classic is simultaneously jewelery and candy.',
+  category: 'candy'
+}, {
+  name: 'Snufflebars',
+  price: 25000,
+  inventory: 10,
+  description: 'No one knows what these are.',
+  category: 'other'
+}, {
+  name: 'Hot Cheetos',
+  price: 600,
+  inventory: 10,
+  description: 'Like regular Cheetos, but hotter and more expensive.',
+  category: 'chips'
+}, {
+  name: 'Doritos',
+  price: 250,
+  inventory: 20,
+  description: 'The healthiest product we sell.',
+  category: 'chips'
+}, {
+  name: 'Pringles',
+  price: 200,
+  inventory: 15,
+  description: 'We only carry original Pringles because we exclusively serve snacks to sociopaths.',
+  category: 'chips'
+}, {
+  name: 'String Cheese',
+  price: 300,
+  inventory: 10,
+  description: 'Made from 100% string cows.',
+  category: 'other'
+}, {
+  name: 'Raisinets',
+  price: 400,
+  inventory: 10,
+  description: 'Really old grapes dunked in chocolate.',
+  category: 'chocolate'
+}, {
+  name: `Welch's Fruit Snacks`,
+  price: 100,
+  inventory: 100,
+  description: 'You thought these were sold exclusively on the subway, huh?',
+  category: 'candy'
+}, {
+  name: 'Gummy Bears',
+  price: 300,
+  inventory: 25,
+  description: 'Raised in the Gummy Forest without antibiotics and harvested in a humane way',
+  category: 'candy'
+}, {
+  name: 'Swedish Fish',
+  price: 250,
+  inventory: 30,
+  description: 'Sweden is famous for these boneless, red fish.',
+  category: 'candy'
+}, {
+  name: 'Chocolate Chip Cookies',
+  price: 500,
+  inventory: 130,
+  description: 'A collaboration with Paula Deen that calls for a stick of butter per cookie.',
+  category: 'cookies'
+}, {
+  name: 'Twizzlers',
+  price: 300,
+  inventory: 100,
+  description: 'Does anyone actually like these?',
+  category: 'candy'
+}];
 
 const users = [
   {email: 'bob@email.com',
