@@ -282,8 +282,4 @@ const seed = async () => {
   db.close()
 }
 
-seed().catch(err => {
-  console.error('Oh noes! Something went wrong!')
-  console.error(err)
-  db.close()
-})
+module.exports = seed;
