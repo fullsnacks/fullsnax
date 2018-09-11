@@ -20,7 +20,8 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'http://manrepeller-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/stephenson_manrepeller_snacks_hero.jpg'
+    defaultValue:
+      'http://manrepeller-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/stephenson_manrepeller_snacks_hero.jpg'
   },
   description: {
     type: Sequelize.TEXT,
