@@ -122,7 +122,7 @@ const users = [
     streetAddress: '123 Pine St.',
     city: 'New Jersey',
     state: 'NJ',
-    zip: 01245
+    zip: '01245'
   },
 
   {
@@ -133,7 +133,7 @@ const users = [
     streetAddress: '312 Pine St.',
     city: 'Santa Fe',
     state: 'NM',
-    zip: 56274
+    zip: '56274'
   },
 
   {
@@ -144,7 +144,7 @@ const users = [
     streetAddress: '55 Center St.',
     city: 'New York',
     state: 'NY',
-    zip: 10002
+    zip: '10002'
   },
 
   {
@@ -155,7 +155,7 @@ const users = [
     streetAddress: '65 Plymouth Ave.',
     city: 'Providence',
     state: 'RI',
-    zip: 06457
+    zip: '06457'
   },
 
   {
@@ -166,7 +166,7 @@ const users = [
     streetAddress: '53 Pine Pl.',
     city: 'Beverly Hills',
     state: 'CA',
-    zip: 90210
+    zip: '90210'
   },
 
   {
@@ -177,7 +177,7 @@ const users = [
     streetAddress: '55 8th St.',
     city: 'Denver',
     state: 'CO',
-    zip: 60124
+    zip: '60124'
   },
 
   {
@@ -188,7 +188,7 @@ const users = [
     streetAddress: '88 Ford Ave.',
     city: 'Boston',
     state: 'MA',
-    zip: 12536
+    zip: '12536'
   },
 
   {
@@ -199,7 +199,7 @@ const users = [
     streetAddress: '83 Super Cir.',
     city: 'Hartford',
     state: 'CT',
-    zip: 23451
+    zip: '23451'
   },
 
   {
@@ -210,7 +210,7 @@ const users = [
     streetAddress: '55 88th St',
     city: 'New York',
     state: 'NY',
-    zip: 10028
+    zip: '10028'
   },
 
   {
@@ -221,7 +221,7 @@ const users = [
     streetAddress: '12 Smith Ave.',
     city: 'Ossining',
     state: 'NY',
-    zip: 10523
+    zip: '10523'
   }
 ]
 
@@ -231,10 +231,10 @@ const seed = async () => {
     await Promise.all(products.map(product => Product.create(product)))
     await Promise.all(users.map(user => User.create(user)))
     console.log('Seeding success!')
-    db.close()
   } catch (error) {
     console.log(error)
   }
+  db.close()
 }
 
 seed().catch(err => {

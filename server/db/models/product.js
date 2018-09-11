@@ -32,7 +32,7 @@ const Product = db.define('product', {
   },
   category: {
     type: Sequelize.ENUM,
-    values: ['candy', 'chips', 'chocolate', 'drinks', 'other']
+    values: ['candy', 'chips', 'chocolate', 'drinks', 'cookies', 'other']
   }
 })
 
