@@ -12,11 +12,18 @@ describe('User routes', () => {
   })
 
   describe('/api/users/', () => {
-    const codysEmail = 'cody@puppybook.com'
+    const codysEmail = 'cody@poppybook.com'
 
     beforeEach(() => {
       return User.create({
-        email: codysEmail
+        email: 'cody@poppybook.com',
+        password: 'bones',
+        firstName: 'Cody',
+        lastName: 'Codington',
+        streetAddress: '123 Pine St.',
+        city: 'New York',
+        state: 'NY',
+        zip: '10024',
       })
     })
 
