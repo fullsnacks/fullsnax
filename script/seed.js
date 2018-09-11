@@ -282,4 +282,4 @@ const seed = async () => {
   db.close()
 }
 
-module.exports = seed;
+module.exports = seed
