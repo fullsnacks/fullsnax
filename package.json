@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "fullsnax",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Sellin' snax",
   "engines": {
     "node": ">= 7.0.0"
   },
