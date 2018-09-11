@@ -52,17 +52,11 @@ const User = db.define('user', {
   },
   streetAddress: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isAlphanumeric: true,
-    },
+    allowNull: false
   },
   city: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isAlpha: true,
-    },
+    allowNull: false
   },
   state: {
     type: Sequelize.ENUM(
@@ -124,14 +118,14 @@ const User = db.define('user', {
       'MP',
       'PW',
       'PR',
-      'VI',
+      'VI'
     ),
-    allowNull: false,
+    allowNull: false
   },
   zip: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-  },
+    type: Sequelize.STRING,
+    allowNull: false
+  }
 })
 
 module.exports = User
