@@ -11,7 +11,7 @@ import {
   AllProducts
 } from './components'
 import {me} from './store'
-import SingleProduct from './components/SingleProduct';
+import SingleProduct from './components/SingleProduct'
 
 /**
  * COMPONENT
