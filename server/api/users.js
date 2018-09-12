@@ -20,3 +20,14 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const user = await User.destroy({
+      where: {id: req.params.userId}
+    })
+    res.json(user)
+  } catch (error) {
+    console.log(error)
+  }
+})
