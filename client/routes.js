@@ -11,6 +11,7 @@ import {
   AllProducts
 } from './components'
 import {me} from './store'
+import SingleProduct from './components/SingleProduct';
 
 /**
  * COMPONENT
@@ -28,6 +29,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/products/:id" component={SingleProduct} />
         <Route path="/users/:userId" component={SingleUser} />
         <Route path="/users" component={Users} />
         <Route path="/products" component={AllProducts} />
