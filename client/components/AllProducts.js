@@ -48,10 +48,11 @@ class AllProducts extends Component {
               .filter(product =>
                 product.name.toLowerCase().includes(filterText.toLowerCase())
               )
-              .map(product =>
-              <NavLink key ={product.id} to={`/products/${product.id}`}>
-              <Product product={product} key={product.id} />
-              </NavLink>)}
+              .map(product => (
+                <NavLink key={product.id} to={`/products/${product.id}`}>
+                  <Product product={product} key={product.id} />
+                </NavLink>
+              ))}
           </div>
         </div>
       )

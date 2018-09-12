@@ -237,4 +237,4 @@ const seed = async () => {
   db.close()
 }
 
-seed();
+seed()
