@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Product from './Product'
 import {getProducts} from '../store/products'
+import {NavLink} from 'react-router-dom'
 
 const tempStyles = {
   display: 'flex',
@@ -47,7 +48,10 @@ class AllProducts extends Component {
               .filter(product =>
                 product.name.toLowerCase().includes(filterText.toLowerCase())
               )
-              .map(product => <Product product={product} key={product.id} />)}
+              .map(product =>
+              <NavLink key ={product.id} to={`/products/${product.id}`}>
+              <Product product={product} key={product.id} />
+              </NavLink>)}
           </div>
         </div>
       )
