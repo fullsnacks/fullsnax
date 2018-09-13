@@ -32,12 +32,22 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {quantity, purchasePrice, productId} = req.body
-    const order = await Order.findOrCreate({
-      where: {
-        isCart: true,
-        userId: req.user.id
-      }
-    })
+    let order;
+    if (req.user) {
+      order = await Order.findOrCreate({
+        where: {
+          isCart: true,
+          userId: req.user.id
+        }
+      })
+    } else {
+      order = await Order.findOrCreate({
+        where: {
+          isCart: true,
+          sessionId: req.sessionID,
+        }
+      })
+    }
     await Sale.create({
       quantity,
       purchasePrice,

@@ -24,7 +24,6 @@ const googleConfig = {
 const strategy = new GoogleStrategy(
   googleConfig,
   (token, refreshToken, profile, done) => {
-    console.log(profile)
     const googleId = profile.id
     const firstName = profile.name.givenName
     const lastName = profile.name.familyName
