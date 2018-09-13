@@ -24,7 +24,7 @@ router.get('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
     const user = await User.destroy({
-      where: {id: req.params.userId}
+      where: {id: req.params.id}
     })
     res.json(user)
   } catch (error) {

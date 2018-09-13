@@ -74,11 +74,11 @@ export const fetchUsers = () => {
   }
 }
 
-export const destroyUser = deleted => {
+export const destroyUser = user => {
   return async dispatch => {
     try {
-      await axios.delete(`/api/users/${deleted.id}`)
-      const action = deleteUser(deleted)
+      await axios.delete(`/api/users/${user.id}`)
+      const action = deleteUser(user)
       dispatch(action)
     } catch (error) {
       console.log(error)
@@ -92,7 +92,7 @@ export const destroyUser = deleted => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return {...state, defaultUser: action.user}
     case SET_ALL_USERS:
       return {...state, users: action.users}
     case DELETE_USER:
@@ -101,7 +101,10 @@ export default function(state = initialState, action) {
         users: state.users.filter(user => user.id !== action.user.id)
       }
     case REMOVE_USER:
-      return initialState
+      return {
+        ...state,
+        defaultUser: {}
+      }
     default:
       return state
   }
