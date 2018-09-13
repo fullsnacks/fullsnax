@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {Sale} = require('../db/models/')
 const {Product} = require('../db/models')
+const {Order} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -30,9 +31,20 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const { quantity, purchasePrice } = req.body;
-    const response = await Sale.create({quantity, purchasePrice})
-    res.json(response)
+    const { quantity, purchasePrice, productId } = req.body;
+    const order = await Order.findOrCreate({
+      where: {
+        isCart: true,
+        userId: req.user.id,
+      },
+    })
+    await Sale.create({
+      quantity,
+      purchasePrice,
+      productId,
+      orderId: order[0].id,
+    })
+    res.status(201).send();
   } catch (error) {
     next(error)
   }
