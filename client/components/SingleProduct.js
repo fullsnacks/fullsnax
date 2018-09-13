@@ -27,9 +27,10 @@ class SingleProduct extends Component {
     })
   }
 
-  async handleSubmit(evt) {
+  async handleSubmit() {
     try {
-      if (this.state.quantity === 0) {
+      // N.B. this.state.quantity is being converted to a string
+      if (this.state.quantity === 0 || this.state.quantity === '0') {
         alert('Please select a valid quantity.')
       } else {
         await axios.post('/api/sales', this.state)
