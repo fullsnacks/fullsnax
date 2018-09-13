@@ -30,7 +30,8 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const response = await Sale.create(req.body)
+    const { quantity, purchasePrice } = req.body;
+    const response = await Sale.create({quantity, purchasePrice})
     res.json(response)
   } catch (error) {
     next(error)
