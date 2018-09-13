@@ -11,7 +11,7 @@ class Users extends Component {
   render() {
     const { users } = this.props
     if (!users) {
-      return <div>loading...</div>
+      return <div>loading....</div>
     } else
       return (
         users.length && (
