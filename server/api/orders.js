@@ -7,10 +7,10 @@ router.get('/', async (req, res, next) => {
   try {
     const orders = await Order.findAll({
       where: {
-        isCart: false,
-      },
-    });
-    res.send(orders);
+        isCart: false
+      }
+    })
+    res.send(orders)
   } catch (err) {
     next(err)
   }
@@ -18,9 +18,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:orderId', async (req, res, next) => {
   try {
-    const orderId = req.params.orderId;
-    const order = await Order.findById(orderId);
-    res.send(order);
+    const orderId = req.params.orderId
+    const order = await Order.findById(orderId)
+    res.send(order)
   } catch (error) {
     next(error)
   }
