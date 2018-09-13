@@ -31,7 +31,7 @@ class Users extends Component {
                         this.props.deleteUser(user)
                       }}
                     >
-                      delete
+                      Delete
                     </button>
                   </div>
                 </div>
