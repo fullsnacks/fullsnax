@@ -8,7 +8,8 @@ import {
   UserHome,
   Users,
   SingleUser,
-  AllProducts
+  AllProducts,
+  Cart
 } from './components'
 import {me} from './store'
 import SingleProduct from './components/SingleProduct'
@@ -33,6 +34,8 @@ class Routes extends Component {
         <Route path="/users/:userId" component={SingleUser} />
         <Route path="/users" component={Users} />
         <Route path="/products" component={AllProducts} />
+        {/* obviously remove the cart route in production */}
+        <Route path="/cart" component={Cart} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
