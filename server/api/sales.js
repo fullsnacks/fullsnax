@@ -31,20 +31,20 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const { quantity, purchasePrice, productId } = req.body;
+    const {quantity, purchasePrice, productId} = req.body
     const order = await Order.findOrCreate({
       where: {
         isCart: true,
-        userId: req.user.id,
-      },
+        userId: req.user.id
+      }
     })
     await Sale.create({
       quantity,
       purchasePrice,
       productId,
-      orderId: order[0].id,
+      orderId: order[0].id
     })
-    res.status(201).send();
+    res.status(201).send()
   } catch (error) {
     next(error)
   }
