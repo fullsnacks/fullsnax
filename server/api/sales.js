@@ -32,7 +32,9 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {quantity, purchasePrice, productId} = req.body
-    console.log("REQ ------", req.session.cookie)
+    if (!req.session.guestId) {
+      req.session.guestId = req.sessionID
+    }
     const order = req.user ? (
       await Order.findOrCreate({
         where: {
@@ -44,7 +46,7 @@ router.post('/', async (req, res, next) => {
       await Order.findOrCreate({
         where: {
           isCart: true,
-          sessionId: req.session.id,
+          sessionId: req.session.guestId,
         }
       })
       )
