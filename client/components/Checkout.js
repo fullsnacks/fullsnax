@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { getCart } from '../store/orders';
+//array of sales
 const dummyData = [
   {
     id: 1,
@@ -25,7 +27,7 @@ class Checkout extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: []
+      orders: []
     }
     this.getCartTotal = this.getCartTotal.bind(this)
   }
@@ -36,8 +38,13 @@ class Checkout extends Component {
     }, 0)
   }
 
+  componentDidMount() {
+    this.props.getCart(this.props.userId);
+  }
+
   render() {
-    return (
+    const { cart } = this.props;
+    return cart.length && (
       <div>
         <h4>Your current shopping cart:</h4>
         {dummyData.map(item => {
@@ -72,5 +79,14 @@ class Checkout extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  guestCart: state.orders.cart,
+  userOrders: state.user.defaultUser.orders,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getCart: id => dispatch(getCart(id))
+})
 
 export default Checkout;
