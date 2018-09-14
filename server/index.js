@@ -10,6 +10,8 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const helmet = require('helmet')
+const expressSanitizer = require('express-sanitizer')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -41,6 +43,7 @@ passport.deserializeUser(async (id, done) => {
 })
 
 const createApp = () => {
+  app.use(helmet())
   // logging middleware
   app.use(morgan('dev'))
 
@@ -63,6 +66,7 @@ const createApp = () => {
   app.use(passport.initialize())
   app.use(passport.session())
 
+  app.use(expressSanitizer())
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))

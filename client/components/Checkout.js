@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { getCart } from '../store/orders';
+//array of sales
 const dummyData = [
   {
     id: 1,
@@ -22,15 +23,14 @@ const dummyData = [
   }
 ]
 
-class Cart extends Component {
+class Checkout extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      orders: [],
+      orders: []
     }
     this.getCartTotal = this.getCartTotal.bind(this)
   }
-
   getCartTotal(cart) {
     return cart.reduce((accumulator, currentVal) => {
       accumulator += currentVal.price * currentVal.quantity
@@ -38,8 +38,13 @@ class Cart extends Component {
     }, 0)
   }
 
+  componentDidMount() {
+    this.props.getCart(this.props.userId);
+  }
+
   render() {
-    return (
+    const { cart } = this.props;
+    return cart.length && (
       <div>
         <h4>Your current shopping cart:</h4>
         {dummyData.map(item => {
@@ -51,8 +56,6 @@ class Cart extends Component {
               <h6 style={{margin: '15px'}}>{item.name}</h6>
               <div style={{textAlign: 'center'}}>
                 <h6 style={{margin: '15px'}}>Quantity:{item.quantity}</h6>
-                <button>+</button>
-                <button>-</button>
               </div>
               <h6 style={{margin: '15px'}}>
                 Subtotal: ${(item.price * item.quantity / 100).toFixed(2)}
@@ -61,10 +64,29 @@ class Cart extends Component {
           )
         })}
         <h2>Your total: ${(this.getCartTotal(dummyData) / 100).toFixed(2)}</h2>
-        <button>CHECKOUT</button>
+        <form action="">
+          <label htmlFor="">Street Address</label>
+          <input type="text"/>
+          <label htmlFor="">City</label>
+          <input type="text"/>
+          <label htmlFor="">State</label>
+          <input type="text"/>
+          <label htmlFor="">Zip</label>
+          <input type="text"/>
+        </form>
+        <button>CONFIRM ORDER</button>
       </div>
     )
   }
 }
 
-export default Cart
+const mapStateToProps = state => ({
+  guestCart: state.orders.cart,
+  userOrders: state.user.defaultUser.orders,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getCart: id => dispatch(getCart(id))
+})
+
+export default Checkout;
