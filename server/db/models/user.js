@@ -32,17 +32,9 @@ const User = db.define('user', {
   },
   firstName: {
     type: Sequelize.STRING,
-    validate: {
-      isAlpha: true,
-      len: [1, 20]
-    }
   },
   lastName: {
     type: Sequelize.STRING,
-    validate: {
-      isAlpha: true,
-      len: [1, 20]
-    }
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux';
 
 const dummyData = [
   {
@@ -25,7 +26,7 @@ class Cart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: []
+      orders: [],
     }
     this.getCartTotal = this.getCartTotal.bind(this)
   }
