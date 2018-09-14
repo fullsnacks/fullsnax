@@ -32,31 +32,19 @@ const User = db.define('user', {
   },
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isAlpha: true,
-      len: [1, 20]
-    }
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isAlpha: true,
-      len: [1, 20]
-    }
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
   streetAddress: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   city: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   state: {
     type: Sequelize.ENUM(
@@ -119,12 +107,10 @@ const User = db.define('user', {
       'PW',
       'PR',
       'VI'
-    ),
-    allowNull: false
+    )
   },
   zip: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   }
 })
 

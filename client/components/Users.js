@@ -9,7 +9,7 @@ class Users extends Component {
   }
 
   render() {
-    const { users } = this.props
+    const {users} = this.props
     if (!users) {
       return <div>loading...</div>
     } else
@@ -45,7 +45,7 @@ class Users extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.user.users,
+    users: state.user.users
   }
 }
 

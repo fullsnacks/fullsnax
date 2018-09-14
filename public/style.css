@@ -15,6 +15,10 @@ nav a {
   margin: 1em;
 }
 
+nav h1 {
+  margin-top: 0;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
