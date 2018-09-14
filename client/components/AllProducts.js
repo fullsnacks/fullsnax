@@ -43,10 +43,21 @@ class AllProducts extends Component {
             value={filterText}
             onChange={this.handleChange}
           />
+          <form onChange={this.handleChange}>
+            <select name="" id="">
+              <option value="">All</option>
+              <option value="candy">Candy</option>
+              <option value="chips">Chips</option>
+              <option value="chocolate">Chocolate</option>
+              <option value="cookies">Cookies</option>
+              <option value="other">Other</option>
+            </select>
+          </form>
           <div style={tempStyles}>
             {products
               .filter(product =>
-                product.name.toLowerCase().includes(filterText.toLowerCase())
+                product.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                product.category.toLowerCase().includes(filterText.toLowerCase())
               )
               .map(product => (
                 <NavLink key={product.id} to={`/products/${product.id}`}>
