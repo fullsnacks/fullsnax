@@ -4,12 +4,19 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
+const tempStyles = {
+  height: '60px',
+  display: 'flex',
+  lineHeight: '60px',
+  verticalAlign: 'middle',
+}
+
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <a href="/products">
-      <h1>FULLSNAX</h1>
-    </a>
-    <nav>
+    <nav style={tempStyles}>
+      <a href="/products">
+        <h1>FULLSNAX</h1>
+      </a>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
@@ -21,9 +28,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
+          <Link to="/products">Products</Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
-          <Link to="/products">Products</Link>
         </div>
       )}
     </nav>
