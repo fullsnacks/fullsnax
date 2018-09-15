@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Arrow from './Arrow'
 import ImageSlide from './ImageSlide'
 
 const imgUrls = [
@@ -13,31 +12,24 @@ class Carousel extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentImageIndex: 0
+      currentImageIndex: 0,
     }
-
-    this.nextSlide = this.nextSlide.bind(this)
-    this.previousSlide = this.previousSlide.bind(this)
   }
 
-  previousSlide() {
-    const lastIndex = imgUrls.length - 1
-    const {currentImageIndex} = this.state
-    const shouldResetIndex = currentImageIndex === 0
-    const index = shouldResetIndex ? lastIndex : currentImageIndex - 1
+  componentDidMount() {
+    const switcher = setInterval(() => {
+      const currentIdx = this.state.currentImageIndex;
+      this.setState({
+        currentImageIndex: (currentIdx + 1) % imgUrls.length,
+      })
+    }, 2500);
     this.setState({
-      currentImageIndex: index
+      switcher,
     })
   }
 
-  nextSlide() {
-    const lastIndex = imgUrls.length - 1
-    const {currentImageIndex} = this.state
-    const shouldResetIndex = currentImageIndex === lastIndex
-    const index = shouldResetIndex ? 0 : currentImageIndex + 1
-    this.setState({
-      currentImageIndex: index
-    })
+  componentWillUnmount() {
+    clearInterval(this.state.switcher);
   }
 
   render() {
@@ -46,20 +38,10 @@ class Carousel extends Component {
         className="carousel"
         style={{display: 'flex', justifyContent: 'center'}}
       >
-        <Arrow
-          direction="left"
-          clickFunction={this.previousSlide}
-          glyph="&#9664;"
-        />
         <ImageSlide url={imgUrls[this.state.currentImageIndex]} />
-        <Arrow
-          direction="right"
-          clickFunction={this.nextSlide}
-          glyph="&#9654;"
-        />
       </div>
     )
   }
 }
 
-export default Carousel
+export default Carousel;
