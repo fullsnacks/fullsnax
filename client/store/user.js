@@ -8,11 +8,12 @@ const GET_USER = 'GET_USER'
 const SET_ALL_USERS = 'SET_ALL_USERS'
 const REMOVE_USER = 'REMOVE_USER'
 const DELETE_USER = 'DELETE_USER'
+const SET_USER_CART = 'SET_USER_CART'
 
 /**
  * INITIAL STATE
  */
-const initialState = {users: [], defaultUser: {}}
+const initialState = {users: [], defaultUser: {}, userCart: []}
 
 /**
  * ACTION CREATORS
@@ -21,6 +22,10 @@ const getUser = user => ({type: GET_USER, user})
 const setAllUsers = users => ({type: SET_ALL_USERS, users})
 const removeUser = () => ({type: REMOVE_USER})
 const deleteUser = user => ({type: DELETE_USER, user})
+const setUserCart = cart => ({
+  type: SET_USER_CART,
+  cart,
+})
 
 /**
  * THUNK CREATORS
@@ -86,6 +91,30 @@ export const destroyUser = user => {
   }
 }
 
+export const getUserCart = id => async dispatch => {
+  try {
+    const { data:userInfo } = await axios.get(`/api/users/${id}/currentOrder`);
+    const cartObj = userInfo.orders[0].sales.reduce((accumulator, currentVal) => {
+      if (accumulator.hasOwnProperty(currentVal.product.name)) {
+        accumulator[currentVal.product.name].quantity += currentVal.quantity;
+      } else {
+        accumulator[currentVal.product.name] = {}
+        accumulator[currentVal.product.name].quantity = currentVal.quantity;
+        accumulator[currentVal.product.name].price = currentVal.product.price;
+      }
+      return accumulator;
+    }, {})
+    const userCart = Object.keys(cartObj).reduce((accumulator, currentVal) => {
+      const newObj = { name: currentVal, quantity: cartObj[currentVal].quantity, price: cartObj[currentVal].price}
+      accumulator.push(newObj);
+      return accumulator;
+    }, [])
+    dispatch(setUserCart(userCart));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 /**
  * REDUCER
  */
@@ -105,6 +134,8 @@ export default function(state = initialState, action) {
         ...state,
         defaultUser: {}
       }
+    case SET_USER_CART:
+      return {...state, userCart: action.cart}
     default:
       return state
   }

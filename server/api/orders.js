@@ -19,7 +19,16 @@ router.get('/', async (req, res, next) => {
 router.get('/:sessionId', async (req, res, next) => {
   try {
     const sessionId = req.params.sessionId
-    const session = await Order.findOne({where: {sessionId: sessionId}})
+    const session = await Order.findOne({
+      where: {
+        sessionId: sessionId
+      },
+      include: [
+        {
+          model: Sale
+        }
+      ]
+    })
     res.send(session)
   } catch (error) {
     next(error)
