@@ -13,7 +13,7 @@ const SET_USER_CART = 'SET_USER_CART'
 /**
  * INITIAL STATE
  */
-const initialState = {users: [], defaultUser: {}, userCart: []}
+const initialState = {users: [], defaultUser: {}, userCart: [], guestId: null}
 
 /**
  * ACTION CREATORS
@@ -70,7 +70,6 @@ export const fetchUsers = () => {
     try {
       const response = await axios.get('/api/users')
       const users = response.data
-      console.log('users in thunk', users)
       const action = setAllUsers(users)
       dispatch(action)
     } catch (error) {

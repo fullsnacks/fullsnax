@@ -25,7 +25,12 @@ router.get('/:sessionId', async (req, res, next) => {
       },
       include: [
         {
-          model: Sale
+          model: Sale,
+          include: [
+            {
+              model: Product,
+            }
+          ]
         }
       ]
     })

@@ -27,6 +27,7 @@ export const fetchCart = sessionId => {
     try {
       const response = await axios.get(`/api/orders/${sessionId}`)
       const cart = response.data
+      console.log('CART IN ORDERS STORE IS =====>', cart)
       const action = getCart(cart)
       dispatch(action)
     } catch (err) {
