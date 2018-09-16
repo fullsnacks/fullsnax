@@ -11,6 +11,14 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// router.get('/guest', async (req, res, next) => {
+//   try {
+//     res.send(req.session.id)
+//   } catch (error) {
+//     next(error);
+//   }
+// })
+
 router.get('/:id/currentOrder', async (req, res, next) => {
   try {
     const userId = req.params.id

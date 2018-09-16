@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/orders'
 import {me, getUserCart} from '../store/user'
+import { Link } from 'react-router-dom'
 
 class Checkout extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class Checkout extends Component {
         cart: this.props.userCart,
       })
     } else {
-      
+
     }
   }
 
@@ -55,7 +56,9 @@ class Checkout extends Component {
         <h2>
           Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}
         </h2>
-        <button>CONFIRM ORDER</button>
+        <Link to='/checkout'>
+          <button>CONFIRM ORDER</button>
+        </Link>
       </div>
     )
   }
@@ -65,7 +68,6 @@ const mapStateToProps = state => ({
   guestCart: state.orders.cart,
   user: state.user.defaultUser,
   userCart: state.user.userCart,
-  products: state.products.products,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -40,6 +40,23 @@ router.get('/:sessionId', async (req, res, next) => {
   }
 })
 
+router.put('/:orderId', async (req, res, next) => {
+  try {
+    console.log('AM I GETTING HERE')
+    const orderId = req.params.orderId;
+    await Order.update({
+      isCart: false,
+    }, {
+      where: {
+        id: orderId,
+      }
+    });
+  res.status(200).send();
+  } catch (error) {
+    next(error)
+  }
+})
+
 // router.get('/:orderId', async (req, res, next) => {
 //   try {
 //     const orderId = req.params.orderId
