@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {fetchCart} from '../store/orders'
 
 const dummyData = [
   {
@@ -30,6 +32,10 @@ class Cart extends Component {
     this.getCartTotal = this.getCartTotal.bind(this)
   }
 
+  componentDidMount() {
+    this.props.fetchCart(this.sessionId)
+  }
+
   getCartTotal(cart) {
     return cart.reduce((accumulator, currentVal) => {
       accumulator += currentVal.price * currentVal.quantity
@@ -38,10 +44,12 @@ class Cart extends Component {
   }
 
   render() {
+    const cart = this.props.cart
+
     return (
       <div>
         <h4>Your current shopping cart:</h4>
-        {dummyData.map(item => {
+        {cart.map(item => {
           return (
             <div
               key={item.id}
@@ -59,10 +67,23 @@ class Cart extends Component {
             </div>
           )
         })}
-        <h2>Your total: ${(this.getCartTotal(dummyData) / 100).toFixed(2)}</h2>
+        <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
       </div>
     )
   }
 }
 
-export default Cart
+const mapStateToProps = state => {
+  return {
+    orders: state.orders.orders,
+    cart: state.orders.cart
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchCart: sessionId => dispatch(fetchCart(sessionId))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

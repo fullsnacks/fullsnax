@@ -16,14 +16,24 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:orderId', async (req, res, next) => {
+router.get('/:sessionId', async (req, res, next) => {
   try {
-    const orderId = req.params.orderId
-    const order = await Order.findById(orderId)
-    res.send(order)
+    const sessionId = req.params.sessionId
+    const session = await Order.findOne({where: {sessionId: sessionId}})
+    res.send(session)
   } catch (error) {
     next(error)
   }
 })
+
+// router.get('/:orderId', async (req, res, next) => {
+//   try {
+//     const orderId = req.params.orderId
+//     const order = await Order.findById(orderId)
+//     res.send(order)
+//   } catch (error) {
+//     next(error)
+//   }
+// })
 
 module.exports = router
