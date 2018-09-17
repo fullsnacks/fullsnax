@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
           model: Sale,
           include: [
             {
-              model: Product,
+              model: Product
             }
           ]
         }

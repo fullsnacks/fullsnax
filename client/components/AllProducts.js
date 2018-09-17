@@ -55,9 +55,14 @@ class AllProducts extends Component {
           </form>
           <div style={tempStyles}>
             {products
-              .filter(product =>
-                product.name.toLowerCase().includes(filterText.toLowerCase()) ||
-                product.category.toLowerCase().includes(filterText.toLowerCase())
+              .filter(
+                product =>
+                  product.name
+                    .toLowerCase()
+                    .includes(filterText.toLowerCase()) ||
+                  product.category
+                    .toLowerCase()
+                    .includes(filterText.toLowerCase())
               )
               .map(product => (
                 <NavLink key={product.id} to={`/products/${product.id}`}>
