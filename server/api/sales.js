@@ -35,21 +35,19 @@ router.post('/', async (req, res, next) => {
     if (!req.session.guestId) {
       req.session.guestId = req.sessionID
     }
-    const order = req.user ? (
-      await Order.findOrCreate({
-        where: {
-          isCart: true,
-          userId: req.user.id
-        }
-      })
-      ) : (
-      await Order.findOrCreate({
-        where: {
-          isCart: true,
-          sessionId: req.session.guestId,
-        }
-      })
-      )
+    const order = req.user
+      ? await Order.findOrCreate({
+          where: {
+            isCart: true,
+            userId: req.user.id
+          }
+        })
+      : await Order.findOrCreate({
+          where: {
+            isCart: true,
+            sessionId: req.session.guestId
+          }
+        })
     await Sale.create({
       quantity,
       purchasePrice,
@@ -61,6 +59,3 @@ router.post('/', async (req, res, next) => {
     next(error)
   }
 })
-
-
-

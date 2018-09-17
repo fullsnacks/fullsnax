@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/orders'
 import {me, getUserCart} from '../store/user'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class Checkout extends Component {
   constructor(props) {
@@ -22,15 +22,15 @@ class Checkout extends Component {
   async componentDidMount() {
     await this.props.me()
     if (this.props.user.id) {
-      const id = this.props.user.id;
-      await this.props.getUserCart(id);
+      const id = this.props.user.id
+      await this.props.getUserCart(id)
       this.setState({
-        cart: this.props.userCart,
+        cart: this.props.userCart
       })
     } else {
-      await this.props.getCart();
+      await this.props.getCart()
       this.setState({
-        cart: this.props.guestCart,
+        cart: this.props.guestCart
       })
     }
   }
@@ -52,20 +52,16 @@ class Checkout extends Component {
               <h6 style={{margin: '15px'}}>{item.name}</h6>
               <div style={{textAlign: 'center'}}>
                 <h6 style={{margin: '15px'}}>Quantity:{item.quantity}</h6>
+
               </div>
-              <h6 style={{margin: '15px'}}>
-                Subtotal: ${(item.price * item.quantity / 100).toFixed(2)}
-              </h6>
-            </div>
-          )
-        })}
-        <h2>
-          Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}
-        </h2>
-        <Link to='/checkout'>
-          <button>CONFIRM ORDER</button>
-        </Link>
-      </div>
+            )
+          })}
+          <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
+          <Link to="/checkout">
+            <button>CONFIRM ORDER</button>
+          </Link>
+        </div>
+      )
     )
   }
 }
@@ -73,13 +69,13 @@ class Checkout extends Component {
 const mapStateToProps = state => ({
   guestCart: state.orders.cart,
   user: state.user.defaultUser,
-  userCart: state.user.userCart,
+  userCart: state.user.userCart
 })
 
 const mapDispatchToProps = dispatch => ({
   getCart: id => dispatch(fetchCart(id)),
   me: () => dispatch(me()),
-  getUserCart: id => dispatch(getUserCart(id)),
+  getUserCart: id => dispatch(getUserCart(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

@@ -29,20 +29,21 @@ router.get('/:id/currentOrder', async (req, res, next) => {
       include: [
         {
           model: Order,
-            where: {
-              isCart: true
-            },
-            include: [
-              {
-                model: Sale,
-                include: [
-                  {
-                    model: Product,
-                  }
-                ]
-              }
-            ]
-        }]
+          where: {
+            isCart: true
+          },
+          include: [
+            {
+              model: Sale,
+              include: [
+                {
+                  model: Product
+                }
+              ]
+            }
+          ]
+        }
+      ]
     })
     res.json(singleUser[0])
   } catch (err) {

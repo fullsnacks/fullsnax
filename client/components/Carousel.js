@@ -12,24 +12,24 @@ class Carousel extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentImageIndex: 0,
+      currentImageIndex: 0
     }
   }
 
   componentDidMount() {
     const switcher = setInterval(() => {
-      const currentIdx = this.state.currentImageIndex;
+      const currentIdx = this.state.currentImageIndex
       this.setState({
-        currentImageIndex: (currentIdx + 1) % imgUrls.length,
+        currentImageIndex: (currentIdx + 1) % imgUrls.length
       })
-    }, 2500);
+    }, 2500)
     this.setState({
-      switcher,
+      switcher
     })
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.switcher);
+    clearInterval(this.state.switcher)
   }
 
   render() {
@@ -44,4 +44,4 @@ class Carousel extends Component {
   }
 }
 
-export default Carousel;
+export default Carousel
