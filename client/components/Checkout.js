@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchCart} from '../store/orders'
-import {me, getUserCart} from '../store/user'
-import axios from 'axios'
+import {fetchCart, finishOrder} from '../store/orders'
+import {me, getUserCart, finishUserOrder} from '../store/user'
 
 class Checkout extends Component {
   constructor(props) {
@@ -40,15 +39,18 @@ class Checkout extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    //take this out of react
-    axios.put(`/api/orders/${this.state.cart[0].id}`)
+    const cartId = this.state.cart[0].id;
+    if (!this.props.user.id) {
+      this.props.finishOrder(cartId);
+    } else {
+      this.props.finishUserOrder(cartId);
+    }
     this.props.history.push('/orderComplete')
   }
 
   handlePromo(event) {
     event.preventDefault()
     if (event.target.promo.value.toLowerCase() === 'dakotaisaloser') {
-      console.log('cart before', this.state.cart)
       const newCart = this.state.cart.map(sale => ({...sale, price: Number((sale.price / 2).toFixed(0)) }))
       this.setState({
         cart: newCart,
@@ -113,7 +115,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCart: id => dispatch(fetchCart(id)),
   me: () => dispatch(me()),
-  getUserCart: id => dispatch(getUserCart(id))
+  getUserCart: id => dispatch(getUserCart(id)),
+  finishOrder: id => dispatch(finishOrder(id)),
+  finishUserOrder: id => dispatch(finishUserOrder(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
