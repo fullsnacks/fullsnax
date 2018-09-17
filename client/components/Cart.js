@@ -52,17 +52,16 @@ class Checkout extends Component {
               <h6 style={{margin: '15px'}}>{item.name}</h6>
               <div style={{textAlign: 'center'}}>
                 <h6 style={{margin: '15px'}}>Quantity:{item.quantity}</h6>
-
               </div>
-              </div>
-            )
-          })}
-          <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
-          <Link to="/checkout">
-            <button>CONFIRM ORDER</button>
-          </Link>
-        </div>
-      )
+            </div>
+          )
+        })}
+        <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
+        <Link to="/checkout">
+          <button>GO TO CHECKOUT</button>
+        </Link>
+      </div>
+    )
   }
 }
 
