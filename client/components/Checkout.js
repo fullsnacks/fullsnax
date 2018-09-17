@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchCart } from '../store/orders';
 import {me, getUserCart} from '../store/user'
 import axios from 'axios';
-import { Redirect } from 'react-router-dom'
 
 class Checkout extends Component {
   constructor(props) {
@@ -30,7 +29,10 @@ class Checkout extends Component {
         cart: this.props.userCart,
       })
     } else {
-
+      await this.props.getCart();
+      this.setState({
+        cart: this.props.guestCart,
+      })
     }
   }
 
