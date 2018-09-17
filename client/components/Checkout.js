@@ -8,10 +8,12 @@ class Checkout extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cart: this.props.userCart
+      cart: this.props.userCart,
+      promoUsed: false,
     }
     this.getCartTotal = this.getCartTotal.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handlePromo = this.handlePromo.bind(this)
   }
   getCartTotal(cart) {
     return cart.reduce((accumulator, currentVal) => {
@@ -39,14 +41,25 @@ class Checkout extends Component {
   handleSubmit(event) {
     event.preventDefault()
     //take this out of react
-    console.log(this.state.cart)
     axios.put(`/api/orders/${this.state.cart[0].id}`)
     this.props.history.push('/orderComplete')
   }
 
+  handlePromo(event) {
+    event.preventDefault()
+    if (event.target.promo.value.toLowerCase() === 'dakotaisaloser') {
+      console.log('cart before', this.state.cart)
+      const newCart = this.state.cart.map(sale => ({...sale, price: Number((sale.price / 2).toFixed(0)) }))
+      this.setState({
+        cart: newCart,
+        promoUsed: true,
+      })
+    }
+  }
+
   render() {
-    const {cart} = this.state
-    return (
+    const {cart, promoUsed} = this.state
+    return !cart.length ? null : (
       <div>
         <h4>Your current shopping cart:</h4>
         {cart.map(item => {
@@ -66,6 +79,14 @@ class Checkout extends Component {
           )
         })}
         <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
+        {!promoUsed &&
+        <div>
+          <form onSubmit={this.handlePromo}>
+            <label htmlFor="promo">Have a promo code?</label>
+            <input type="text" name="promo"/>
+            <button type="submit">Apply</button>
+          </form>
+        </div>}
         <h5>Please enter your shipping information:</h5>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="">Street Address</label>

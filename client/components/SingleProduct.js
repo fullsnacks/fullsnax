@@ -4,8 +4,8 @@ import {getSingleProduct} from '../store/products'
 import axios from 'axios'
 
 class SingleProduct extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       quantity: 1,
       purchasePrice: 0
@@ -32,6 +32,7 @@ class SingleProduct extends Component {
         productId: this.props.products.singleProduct.id
       })
       await axios.post('/api/sales', this.state)
+      this.props.history.push('/cart');
     } catch (error) {
       alert(error)
     }
