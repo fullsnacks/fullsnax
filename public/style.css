@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: lightblue;
 }
 
 a {
@@ -23,3 +24,5 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+

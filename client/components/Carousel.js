@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import ImageSlide from './ImageSlide'
 
 const imgUrls = [
-  '/carouselPics/snacks1.jpg',
+  '/carouselPics/snacks1.png',
   '/carouselPics/snacks2.jpg',
-  '/carouselPics/snacks3.jpeg',
+  '/carouselPics/snacks3.png',
   '/carouselPics/snacks4.jpg'
 ]
 

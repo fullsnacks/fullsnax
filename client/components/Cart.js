@@ -37,6 +37,9 @@ class Checkout extends Component {
 
   render() {
     const {cart} = this.state
+    if (!cart.length) {
+      return <div>Cart is currently empty :((</div>
+    }
     return cart.length && (
       <div>
         <h4>Your current shopping cart:</h4>
