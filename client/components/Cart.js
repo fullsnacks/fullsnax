@@ -54,6 +54,7 @@ class Checkout extends Component {
                 <h6 style={{margin: '15px'}}>Quantity:{item.quantity}</h6>
 
               </div>
+              </div>
             )
           })}
           <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
@@ -62,7 +63,6 @@ class Checkout extends Component {
           </Link>
         </div>
       )
-    )
   }
 }
 
