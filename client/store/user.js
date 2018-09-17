@@ -15,6 +15,7 @@ const SET_GUEST_ID = 'SET_GUEST_ID'
  * INITIAL STATE
  */
 const initialState = {users: [], defaultUser: {}, userCart: [], guestId: null}
+// consider refactoring initialState and the reducer - R.K.
 
 /**
  * ACTION CREATORS
@@ -25,11 +26,11 @@ const removeUser = () => ({type: REMOVE_USER})
 const deleteUser = user => ({type: DELETE_USER, user})
 const setUserCart = cart => ({
   type: SET_USER_CART,
-  cart,
+  cart
 })
 const setGuest = guestId => ({
   type: SET_GUEST_ID,
-  guestId,
+  guestId
 })
 
 /**
@@ -97,35 +98,43 @@ export const destroyUser = user => {
 
 export const getUserCart = id => async dispatch => {
   try {
-    const { data:userInfo } = await axios.get(`/api/users/${id}/currentOrder`);
-    const orderId = userInfo.orders[0].id;
-    const cartObj = userInfo.orders[0].sales.reduce((accumulator, currentVal) => {
-      if (accumulator.hasOwnProperty(currentVal.product.name)) {
-        accumulator[currentVal.product.name].quantity += currentVal.quantity;
-      } else {
-        accumulator[currentVal.product.name] = {}
-        accumulator[currentVal.product.name].quantity = currentVal.quantity;
-        accumulator[currentVal.product.name].price = currentVal.product.price;
-      }
-      return accumulator;
-    }, {})
+    const {data: userInfo} = await axios.get(`/api/users/${id}/currentOrder`)
+    const orderId = userInfo.orders[0].id
+    const cartObj = userInfo.orders[0].sales.reduce(
+      (accumulator, currentVal) => {
+        if (accumulator.hasOwnProperty(currentVal.product.name)) {
+          accumulator[currentVal.product.name].quantity += currentVal.quantity
+        } else {
+          accumulator[currentVal.product.name] = {}
+          accumulator[currentVal.product.name].quantity = currentVal.quantity
+          accumulator[currentVal.product.name].price = currentVal.product.price
+        }
+        return accumulator
+      },
+      {}
+    )
     const userCart = Object.keys(cartObj).reduce((accumulator, currentVal) => {
-      const newObj = { id: orderId, name: currentVal, quantity: cartObj[currentVal].quantity, price: cartObj[currentVal].price}
-      accumulator.push(newObj);
-      return accumulator;
+      const newObj = {
+        id: orderId,
+        name: currentVal,
+        quantity: cartObj[currentVal].quantity,
+        price: cartObj[currentVal].price
+      }
+      accumulator.push(newObj)
+      return accumulator
     }, [])
-    dispatch(setUserCart(userCart));
+    dispatch(setUserCart(userCart))
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
 export const getGuest = () => async dispatch => {
   try {
-    const {data:id} = await axios.get('/guest');
+    const {data: id} = await axios.get('/guest')
     dispatch(setGuest(id))
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 

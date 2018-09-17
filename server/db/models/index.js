@@ -10,6 +10,8 @@ Sale.belongsTo(Product)
 Order.hasMany(Sale)
 Sale.belongsTo(Order)
 
+// redefine model associaton (e.g., Product.belongsToMany(Order, {through: Sale})) and vice versa
+
 module.exports = {
   User,
   Product,

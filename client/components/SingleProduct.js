@@ -34,6 +34,7 @@ class SingleProduct extends Component {
         alert('Please select a valid quantity.')
       } else {
         await axios.post('/api/sales', this.state)
+        // lets move this to the store as well - R.K.
       }
     } catch (error) {
       alert(error)

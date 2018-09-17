@@ -20,8 +20,10 @@ router.get('/', async (req, res, next) => {
 // })
 
 router.get('/:id/currentOrder', async (req, res, next) => {
+  // protect these routes - R.K.
   try {
     const userId = req.params.id
+    // can change to findOne - R.K.
     const singleUser = await User.findAll({
       where: {
         id: userId
@@ -29,20 +31,21 @@ router.get('/:id/currentOrder', async (req, res, next) => {
       include: [
         {
           model: Order,
-            where: {
-              isCart: true
-            },
-            include: [
-              {
-                model: Sale,
-                include: [
-                  {
-                    model: Product,
-                  }
-                ]
-              }
-            ]
-        }]
+          where: {
+            isCart: true
+          },
+          include: [
+            {
+              model: Sale,
+              include: [
+                {
+                  model: Product
+                }
+              ]
+            }
+          ]
+        }
+      ]
     })
     res.json(singleUser[0])
   } catch (err) {

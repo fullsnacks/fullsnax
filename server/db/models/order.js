@@ -11,4 +11,6 @@ const Order = db.define('order', {
   }
 })
 
+// rename files to be capitalized - R.K.
+
 module.exports = Order

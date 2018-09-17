@@ -13,6 +13,7 @@ const Product = db.define('product', {
   price: {
     type: Sequelize.INTEGER,
     allowNull: false
+    // consider more validations - R.K.
   },
   inventory: {
     type: Sequelize.INTEGER,
@@ -22,6 +23,7 @@ const Product = db.define('product', {
     type: Sequelize.STRING,
     defaultValue:
       'http://manrepeller-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/stephenson_manrepeller_snacks_hero.jpg'
+    // consider downloaindg image - RK
   },
   description: {
     type: Sequelize.TEXT,

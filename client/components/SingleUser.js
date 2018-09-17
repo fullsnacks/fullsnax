@@ -20,6 +20,7 @@ class SingleUser extends Component {
       }
 
       return (
+        // same comment about classifying divs - R.K.
         <div>
           <div>
             {selectedUser.firstName} {selectedUser.lastName}

@@ -8,9 +8,11 @@ const tempStyles = {
   textAlign: 'center'
 }
 
+// consider renaming to AllProducts-Card - R.K.
 const Product = props => {
   const {product} = props
   return (
+    // make sure to identify divs (and other jsx elements) - R.K.
     <div style={tempStyles}>
       <h4>{product.name}</h4>
       <img src={product.imageUrl} width="100" alt="" />
