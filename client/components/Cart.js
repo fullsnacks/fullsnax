@@ -28,7 +28,10 @@ class Checkout extends Component {
         cart: this.props.userCart,
       })
     } else {
-
+      await this.props.getCart();
+      this.setState({
+        cart: this.props.guestCart,
+      })
     }
   }
 

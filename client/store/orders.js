@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 
 const GET_ORDERS = 'GET_ORDERS'
 const GET_CART = 'GET_CART'
@@ -22,13 +21,28 @@ export const fetchOrders = () => {
   }
 }
 
-export const fetchCart = sessionId => {
+export const fetchCart = () => {
   return async dispatch => {
     try {
-      const response = await axios.get(`/api/orders/${sessionId}`)
+      const response = await axios.get('/api/guestCart')
       const cart = response.data
-      console.log('CART IN ORDERS STORE IS =====>', cart)
-      const action = getCart(cart)
+      console.log('CART IN ORDER STORE', cart, 'after cart')
+      const cartObj = cart.sales.reduce((accumulator, currentVal) => {
+        if (accumulator.hasOwnProperty(currentVal.product.name)) {
+          accumulator[currentVal.product.name].quantity += currentVal.quantity;
+        } else {
+          accumulator[currentVal.product.name] = {}
+          accumulator[currentVal.product.name].quantity = currentVal.quantity;
+          accumulator[currentVal.product.name].price = currentVal.product.price;
+        }
+        return accumulator;
+      }, {});
+      const guestCart = Object.keys(cartObj).reduce((accumulator, currentVal) => {
+        const newObj = { name: currentVal, quantity: cartObj[currentVal].quantity, price: cartObj[currentVal].price}
+        accumulator.push(newObj);
+        return accumulator;
+      }, []);
+      const action = getCart(guestCart)
       dispatch(action)
     } catch (err) {
       console.log(err)
