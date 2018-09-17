@@ -14,7 +14,7 @@ const SET_GUEST_ID = 'SET_GUEST_ID'
 /**
  * INITIAL STATE
  */
-const initialState = {users: [], defaultUser: {}, userCart: [], guestId: null}
+const initialState = {users: [], defaultUser: {}, userCart: []}
 
 /**
  * ACTION CREATORS
