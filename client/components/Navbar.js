@@ -11,19 +11,34 @@ const tempStyles = {
   verticalAlign: 'middle'
 }
 
+const logoStyle = {
+  fontFamily: 'Luckiest Guy',
+  fontSize: '2em',
+  textShadow: '2px 2px black',
+  color: 'orange',
+  textOutline: 'black'
+}
+
+const tempCartStyle = {
+  marginBottom: '-6px',
+  height: '25px'
+}
+
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav style={tempStyles}>
-      <a href="/products">
-        <h1>FULLSNAX</h1>
+      <a href="/">
+        <h1 style={logoStyle}>FULLSNAXX</h1>
       </a>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+          <Link to="/myAccount">My Account</Link>
+          <Link to="/products">Products</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          <Link to="/cart"><img src="/cart.png" style={tempCartStyle} alt="cart"/></Link>
         </div>
       ) : (
         <div>
@@ -31,6 +46,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/products">Products</Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
+          <Link to="/cart"><img src="/cart.png" style={tempCartStyle} alt="cart"/></Link>
         </div>
       )}
     </nav>

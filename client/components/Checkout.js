@@ -39,6 +39,7 @@ class Checkout extends Component {
   handleSubmit(event) {
     event.preventDefault()
     //take this out of react
+    console.log(this.state.cart)
     axios.put(`/api/orders/${this.state.cart[0].id}`)
     this.props.history.push('/orderComplete')
   }

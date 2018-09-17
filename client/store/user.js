@@ -10,11 +10,12 @@ const REMOVE_USER = 'REMOVE_USER'
 const DELETE_USER = 'DELETE_USER'
 const SET_USER_CART = 'SET_USER_CART'
 const SET_GUEST_ID = 'SET_GUEST_ID'
+const GET_PAST_ORDERS = 'GET_PAST_ORDERS'
 
 /**
  * INITIAL STATE
  */
-const initialState = {users: [], defaultUser: {}, userCart: [], guestId: null}
+const initialState = {users: [], defaultUser: {}, userCart: [], guestId: null, pastOrders: []}
 
 /**
  * ACTION CREATORS
@@ -30,6 +31,10 @@ const setUserCart = cart => ({
 const setGuest = guestId => ({
   type: SET_GUEST_ID,
   guestId
+})
+const getPastOrders = pastOrders => ({
+  type: GET_PAST_ORDERS,
+  pastOrders
 })
 
 /**
@@ -54,7 +59,7 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/myAccount')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
@@ -137,6 +142,16 @@ export const getGuest = () => async dispatch => {
   }
 }
 
+export const fetchPastOrders = (id) => async dispatch => {
+  try {
+    const response = await axios.get(`/api/users/${id}`)
+    const orders = response.data.orders
+    dispatch(getPastOrders(orders))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -158,6 +173,8 @@ export default function(state = initialState, action) {
       }
     case SET_USER_CART:
       return {...state, userCart: action.cart}
+    case GET_PAST_ORDERS:
+      return {...state, pastOrders: action.pastOrders}
     default:
       return state
   }

@@ -37,23 +37,22 @@ class Checkout extends Component {
 
   render() {
     const {cart} = this.state
-    return (
-      cart.length && (
-        <div>
-          <h4>Your current shopping cart:</h4>
-          {cart.map(item => {
-            return (
-              <div
-                key={item.name}
-                style={{display: 'flex', border: '1px solid black'}}
-              >
-                <h6 style={{margin: '15px'}}>{item.name}</h6>
-                <div style={{textAlign: 'center'}}>
-                  <h6 style={{margin: '15px'}}>Quantity:{item.quantity}</h6>
-                </div>
-                <h6 style={{margin: '15px'}}>
-                  Subtotal: ${(item.price * item.quantity / 100).toFixed(2)}
-                </h6>
+    if (!cart.length) {
+      return <div>Cart is currently empty :((</div>
+    }
+    return cart.length && (
+      <div>
+        <h4>Your current shopping cart:</h4>
+        {cart.map(item => {
+          return (
+            <div
+              key={item.name}
+              style={{display: 'flex', border: '1px solid black'}}
+            >
+              <h6 style={{margin: '15px'}}>{item.name}</h6>
+              <div style={{textAlign: 'center'}}>
+                <h6 style={{margin: '15px'}}>Quantity:{item.quantity}</h6>
+
               </div>
             )
           })}
