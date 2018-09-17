@@ -4,10 +4,10 @@ import {getSingleProduct} from '../store/products'
 import axios from 'axios'
 
 class SingleProduct extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      quantity: 0,
+      quantity: 1,
       purchasePrice: 0
     }
     this.handleChange = this.handleChange.bind(this)
@@ -22,19 +22,16 @@ class SingleProduct extends Component {
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value,
-      purchasePrice: this.props.products.singleProduct.price,
-      productId: this.props.products.singleProduct.id
     })
   }
 
   async handleSubmit() {
     try {
-      // N.B. this.state.quantity is being converted to a string
-      if (this.state.quantity === 0 || this.state.quantity === '0') {
-        alert('Please select a valid quantity.')
-      } else {
-        await axios.post('/api/sales', this.state)
-      }
+      await this.setState({
+        purchasePrice: this.props.products.singleProduct.price,
+        productId: this.props.products.singleProduct.id
+      })
+      await axios.post('/api/sales', this.state)
     } catch (error) {
       alert(error)
     }
@@ -46,7 +43,7 @@ class SingleProduct extends Component {
 
     const inventoryArray = () => {
       let arr = []
-      for (let i = 0; i <= product.inventory; i++) {
+      for (let i = 1; i <= product.inventory; i++) {
         arr.push(i)
       }
       return arr
