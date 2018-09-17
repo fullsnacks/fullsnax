@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/orders'
 import {me, getUserCart} from '../store/user'
+import { Link } from 'react-router-dom'
 
 class Checkout extends Component {
   constructor(props) {
@@ -26,6 +27,8 @@ class Checkout extends Component {
       this.setState({
         cart: this.props.userCart,
       })
+    } else {
+
     }
   }
 
@@ -53,17 +56,9 @@ class Checkout extends Component {
         <h2>
           Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}
         </h2>
-        {/* <form action="">
-          <label htmlFor="">Street Address</label>
-          <input type="text" />
-          <label htmlFor="">City</label>
-          <input type="text" />
-          <label htmlFor="">State</label>
-          <input type="text" />
-          <label htmlFor="">Zip</label>
-          <input type="text" />
-        </form> */}
-        <button>CONFIRM ORDER</button>
+        <Link to='/checkout'>
+          <button>CONFIRM ORDER</button>
+        </Link>
       </div>
     )
   }
@@ -71,10 +66,8 @@ class Checkout extends Component {
 
 const mapStateToProps = state => ({
   guestCart: state.orders.cart,
-  // userOrders: state.user.defaultUser.orders,
   user: state.user.defaultUser,
   userCart: state.user.userCart,
-  products: state.products.products,
 })
 
 const mapDispatchToProps = dispatch => ({

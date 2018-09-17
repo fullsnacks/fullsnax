@@ -9,11 +9,12 @@ const SET_ALL_USERS = 'SET_ALL_USERS'
 const REMOVE_USER = 'REMOVE_USER'
 const DELETE_USER = 'DELETE_USER'
 const SET_USER_CART = 'SET_USER_CART'
+const SET_GUEST_ID = 'SET_GUEST_ID'
 
 /**
  * INITIAL STATE
  */
-const initialState = {users: [], defaultUser: {}, userCart: []}
+const initialState = {users: [], defaultUser: {}, userCart: [], guestId: null}
 
 /**
  * ACTION CREATORS
@@ -25,6 +26,10 @@ const deleteUser = user => ({type: DELETE_USER, user})
 const setUserCart = cart => ({
   type: SET_USER_CART,
   cart,
+})
+const setGuest = guestId => ({
+  type: SET_GUEST_ID,
+  guestId,
 })
 
 /**
@@ -70,7 +75,6 @@ export const fetchUsers = () => {
     try {
       const response = await axios.get('/api/users')
       const users = response.data
-      console.log('users in thunk', users)
       const action = setAllUsers(users)
       dispatch(action)
     } catch (error) {
@@ -94,6 +98,7 @@ export const destroyUser = user => {
 export const getUserCart = id => async dispatch => {
   try {
     const { data:userInfo } = await axios.get(`/api/users/${id}/currentOrder`);
+    const orderId = userInfo.orders[0].id;
     const cartObj = userInfo.orders[0].sales.reduce((accumulator, currentVal) => {
       if (accumulator.hasOwnProperty(currentVal.product.name)) {
         accumulator[currentVal.product.name].quantity += currentVal.quantity;
@@ -105,11 +110,20 @@ export const getUserCart = id => async dispatch => {
       return accumulator;
     }, {})
     const userCart = Object.keys(cartObj).reduce((accumulator, currentVal) => {
-      const newObj = { name: currentVal, quantity: cartObj[currentVal].quantity, price: cartObj[currentVal].price}
+      const newObj = { id: orderId, name: currentVal, quantity: cartObj[currentVal].quantity, price: cartObj[currentVal].price}
       accumulator.push(newObj);
       return accumulator;
     }, [])
     dispatch(setUserCart(userCart));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getGuest = () => async dispatch => {
+  try {
+    const {data:id} = await axios.get('/guest');
+    dispatch(setGuest(id))
   } catch (error) {
     console.log(error);
   }

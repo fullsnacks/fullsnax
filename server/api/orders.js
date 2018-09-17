@@ -25,11 +25,33 @@ router.get('/:sessionId', async (req, res, next) => {
       },
       include: [
         {
-          model: Sale
+          model: Sale,
+          include: [
+            {
+              model: Product,
+            }
+          ]
         }
       ]
     })
     res.send(session)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/:orderId', async (req, res, next) => {
+  try {
+    console.log('AM I GETTING HERE')
+    const orderId = req.params.orderId;
+    await Order.update({
+      isCart: false,
+    }, {
+      where: {
+        id: orderId,
+      }
+    });
+  res.status(200).send();
   } catch (error) {
     next(error)
   }
