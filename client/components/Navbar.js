@@ -8,7 +8,7 @@ const tempStyles = {
   height: '60px',
   display: 'flex',
   lineHeight: '60px',
-  verticalAlign: 'middle',
+  verticalAlign: 'middle'
 }
 
 const Navbar = ({handleClick, isLoggedIn}) => (

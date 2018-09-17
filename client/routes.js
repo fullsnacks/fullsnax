@@ -12,7 +12,7 @@ import {
   Cart,
   Home,
   Checkout,
-  OrderComplete,
+  OrderComplete
 } from './components'
 import {me} from './store'
 import SingleProduct from './components/SingleProduct'
