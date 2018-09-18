@@ -37,7 +37,7 @@ class Cart extends Component {
   }
 
   async handleDelete(id) {
-    this.props.deleteSale(id);
+    await this.props.deleteSale(id);
     if (this.props.user.id) {
       const id = this.props.user.id
       await this.props.getUserCart(id)
@@ -55,7 +55,9 @@ class Cart extends Component {
   render() {
     const {cart} = this.state
     if (!cart.length) {
-      return <div>Cart is currently empty :((</div>
+      return <div style={{textAlign: 'center'}} >
+        <img src='/cookieMonster.jpg'></img>
+      </div>
     }
     return cart.length && (
       <div>
