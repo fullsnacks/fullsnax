@@ -7,7 +7,7 @@ const tempStyles = {
 
 const logoStyle = {
   fontFamily: 'Luckiest Guy',
-  fontSize: '4em',
+  fontSize: '4.5em',
   textShadow: '2px 2px black',
   color: 'orange'
 }

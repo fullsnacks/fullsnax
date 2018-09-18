@@ -8,49 +8,56 @@ const products = [
     price: 500,
     inventory: 10,
     description: 'You know what Cheetos are.',
-    category: 'chips'
+    category: 'chips',
+    imageUrl: 'https://target.scene7.com/is/image/Target/13326809_Alt02?wid=488&hei=488&fmt=pjpeg'
   },
   {
     name: 'Freetos',
     price: 500,
     inventory: 10,
     description: 'These are Freetos. (Note: these are not Cheetos)',
-    category: 'chips'
+    category: 'chips',
+    imageUrl: 'https://www.fritolay.com/images/default-source/blue-bag-image/fritos-original.png?sfvrsn=b704563a_2'
   },
   {
     name: 'Oreos',
     price: 1000,
     inventory: 5,
     description: 'Chocolate cookies surround a wonderful, creamy center.',
-    category: 'cookies'
+    category: 'cookies',
+    imageUrl: 'https://images.csmonitor.com/csm/2013/10/1016-oreos-addictive.jpg?alias=standard_900x600'
   },
   {
     name: 'Ring-Pop',
     price: 100,
     inventory: 100,
     description: 'This 90s classic is simultaneously jewelery and candy.',
-    category: 'candy'
+    category: 'candy',
+    imageUrl: 'https://sep.yimg.com/ay/candy-crate/ring-pops-24ct-6.gif'
   },
   {
     name: 'Snufflebars',
     price: 25000,
     inventory: 10,
     description: 'No one knows what these are.',
-    category: 'other'
+    category: 'other',
+    imageUrl: 'http://fishtownbeerrunners.com/wp-content/uploads/2013/09/WC8Or71o13c2832333739383C8Or71oq_1266122155.jpg'
   },
   {
     name: 'Hot Cheetos',
     price: 600,
     inventory: 10,
     description: 'Like regular Cheetos, but hotter and more expensive.',
-    category: 'chips'
+    category: 'chips',
+    imageUrl: 'https://target.scene7.com/is/image/Target/12992238?wid=488&hei=488&fmt=pjpeg'
   },
   {
     name: 'Doritos',
     price: 250,
     inventory: 20,
     description: 'The healthiest product we sell.',
-    category: 'chips'
+    category: 'chips',
+    imageUrl: 'https://media.glamour.com/photos/5a788e516a41a70bc017a59d/master/w_644,c_limit/GettyImages-91692426.jpg'
   },
   {
     name: 'Pringles',
@@ -58,28 +65,32 @@ const products = [
     inventory: 15,
     description:
       'We only carry original Pringles because we exclusively serve snacks to sociopaths.',
-    category: 'chips'
+    category: 'chips',
+    imageUrl: 'http://stuffpoint.com/pringles/image/44131-pringles-original.jpg'
   },
   {
     name: 'String Cheese',
     price: 300,
     inventory: 10,
     description: 'Made from 100% string cows.',
-    category: 'other'
+    category: 'other',
+    imageUrl: 'http://s3.envato.com/files/243799501/_00A4433.jpg'
   },
   {
     name: 'Raisinets',
     price: 400,
     inventory: 10,
     description: 'Really old grapes dunked in chocolate.',
-    category: 'chocolate'
+    category: 'chocolate',
+    imageUrl: 'https://sep.yimg.com/ay/candy-crate/raisinets-theater-size-box-3-5oz-6.gif'
   },
   {
     name: `Welch's Fruit Snacks`,
     price: 100,
     inventory: 100,
     description: 'You thought these were sold exclusively on the subway, huh?',
-    category: 'candy'
+    category: 'candy',
+    imageUrl: 'https://www.kroger.com/product/images/xlarge/front/0003485615040'
   },
   {
     name: 'Gummy Bears',
@@ -87,14 +98,16 @@ const products = [
     inventory: 25,
     description:
       'Raised in the Gummy Forest without antibiotics and harvested in a humane way',
-    category: 'candy'
+    category: 'candy',
+    imageUrl: 'https://cdn.candynation.com/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/g/o/gold_bears__12117.jpg'
   },
   {
     name: 'Swedish Fish',
     price: 250,
     inventory: 30,
     description: 'Sweden is famous for these boneless, red fish.',
-    category: 'candy'
+    category: 'candy',
+    imageUrl: 'https://cdn.influenster.com/media/product/image/swedish-fish-red-theater-size-boxes-12ct-3.jpg.750x750_q85ss0_progressive.jpg'
   },
   {
     name: 'Chocolate Chip Cookies',
@@ -102,14 +115,24 @@ const products = [
     inventory: 130,
     description:
       'A collaboration with Paula Deen that calls for a stick of butter per cookie.',
-    category: 'cookies'
+    category: 'cookies',
+    imageUrl: 'https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg'
   },
   {
     name: 'Twizzlers',
     price: 300,
     inventory: 100,
     description: 'Does anyone actually like these?',
-    category: 'candy'
+    category: 'candy',
+    imageUrl: 'https://i.ytimg.com/vi/TkImmx8aV2c/maxresdefault.jpg'
+  },
+  {
+    name: `Chester's Hot Fries`,
+    price: 200,
+    inventory: 50,
+    description: `FLAMIN' HOTTTTTTTT (Wait...isn't that the Cheetos guy?)`,
+    category: 'chips',
+    imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/919m6aEGt3L._SL1500_.jpg'
   }
 ]
 
