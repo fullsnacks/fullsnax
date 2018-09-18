@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getSingleProduct} from '../store/products'
+import {getSingleProduct, makeSale} from '../store/products'
 import axios from 'axios'
 
 const imgStyle = {
@@ -36,8 +36,8 @@ class SingleProduct extends Component {
         purchasePrice: this.props.products.singleProduct.price,
         productId: this.props.products.singleProduct.id
       })
-      await axios.post('/api/sales', this.state)
-      this.props.history.push('/cart');
+      makeSale(this.state)
+      this.props.history.push('/cart')
     } catch (error) {
       alert(error)
     }
@@ -56,7 +56,7 @@ class SingleProduct extends Component {
     }
 
     return (
-      <div className='single-product'>
+      <div className="single-product">
         <h1>{product.name}</h1>
         <img src={product.imageUrl} style={imgStyle} />
         <p style={{fontStyle: 'italic'}}>{product.description}</p>
@@ -86,6 +86,9 @@ const mapState = ({products}) => ({products})
 const mapDispatch = dispatch => ({
   fetchSingleProduct: id => {
     dispatch(getSingleProduct(id))
+  },
+  makeSale: state => {
+    dispatch(makeSale(state))
   }
 })
 
