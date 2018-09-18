@@ -37,7 +37,7 @@ class Cart extends Component {
   }
 
   async handleDelete(id) {
-    this.props.deleteSale(id);
+    await this.props.deleteSale(id);
     if (this.props.user.id) {
       const id = this.props.user.id
       await this.props.getUserCart(id)
