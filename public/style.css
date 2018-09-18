@@ -117,3 +117,7 @@ form div {
   width: 140px;
   object-fit: contain;
 }
+
+.single-product {
+  text-align: center
+}

@@ -56,7 +56,7 @@ class SingleProduct extends Component {
     }
 
     return (
-      <div>
+      <div className='single-product'>
         <h1>{product.name}</h1>
         <img src={product.imageUrl} style={imgStyle} />
         <p style={{fontStyle: 'italic'}}>{product.description}</p>

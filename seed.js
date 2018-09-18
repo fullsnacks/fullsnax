@@ -15,13 +15,13 @@ const products = [
     name: 'Freetos',
     price: 500,
     inventory: 10,
-    description: 'These are Freetos. (Note: these are not Cheetos)',
+    description: 'These are "Fritos". (Note: these are not Cheetos)',
     category: 'chips',
     imageUrl: '/productImgs/fritos.png'
   },
   {
     name: 'Oreos',
-    price: 1000,
+    price: 500,
     inventory: 5,
     description: 'Chocolate cookies surround a wonderful, creamy center.',
     category: 'cookies',
@@ -36,7 +36,7 @@ const products = [
     imageUrl: '/productImgs/ringpop.png'
   },
   {
-    name: 'Snufflebars',
+    name: 'Snufflebar',
     price: 25000,
     inventory: 10,
     description: 'No one knows what these are.',
