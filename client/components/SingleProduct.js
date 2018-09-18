@@ -3,6 +3,11 @@ import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/products'
 import axios from 'axios'
 
+const imgStyle = {
+  maxWidth: '400px',
+  maxHeight: '400px'
+}
+
 class SingleProduct extends Component {
   constructor(props) {
     super(props)
@@ -53,7 +58,7 @@ class SingleProduct extends Component {
     return (
       <div>
         <h1>{product.name}</h1>
-        <img src={product.imageUrl} style={{maxWidth: '400px'}} />
+        <img src={product.imageUrl} style={imgStyle} />
         <p style={{fontStyle: 'italic'}}>{product.description}</p>
         <br />
         <p>Price: ${dollarPrice.toFixed(2)}</p>
