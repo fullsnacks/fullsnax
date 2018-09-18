@@ -4,48 +4,48 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll()
-    res.json(users)
+    if (!req.user || !req.user.isAdmin) {
+      res.send("sorry Corey, you don't have access to this information")
+    } else {
+      const users = await User.findAll()
+      res.json(users)
+    }
   } catch (err) {
     next(err)
   }
 })
 
-// router.get('/guest', async (req, res, next) => {
-//   try {
-//     res.send(req.session.id)
-//   } catch (error) {
-//     next(error);
-//   }
-// })
-
 router.get('/:id/currentOrder', async (req, res, next) => {
   try {
-    const userId = req.params.id
-    const singleUser = await User.findAll({
-      where: {
-        id: userId
-      },
-      include: [
-        {
-          model: Order,
-          where: {
-            isCart: true
-          },
-          include: [
-            {
-              model: Sale,
-              include: [
-                {
-                  model: Product
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    })
-    res.json(singleUser[0])
+    if (!req.user || Number(req.user.id) !== Number(req.params.id) && req.user.isAdmin) {
+      res.send('No, Corey. No.')
+    } else {
+      const userId = req.params.id
+      const singleUser = await User.findAll({
+        where: {
+          id: userId
+        },
+        include: [
+          {
+            model: Order,
+            where: {
+              isCart: true
+            },
+            include: [
+              {
+                model: Sale,
+                include: [
+                  {
+                    model: Product
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      })
+      res.json(singleUser[0])
+    }
   } catch (err) {
     next(err)
   }
@@ -53,30 +53,35 @@ router.get('/:id/currentOrder', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const userId = req.params.id
-    const singleUser = await User.findAll({
-      where: {
-        id: userId
-      },
-      include: [
-        {
-          model: Order,
-            where: {
-              isCart: false
-            },
-            include: [
-              {
-                model: Sale,
-                include: [
-                  {
-                    model: Product,
-                  }
-                ]
-              }
-            ]
-        }]
-    })
-    res.json(singleUser[0])
+    console.log('REQ USER', req.user.id, req.params.id)
+    if (Number(req.user.id) !== Number(req.params.id) && !req.user.isAdmin) {
+      res.send('You no go here')
+    } else {
+      const userId = req.params.id
+      const singleUser = await User.findAll({
+        where: {
+          id: userId
+        },
+        include: [
+          {
+            model: Order, required: false,
+              where: {
+                isCart: false
+              },
+              include: [
+                {
+                  model: Sale,
+                  include: [
+                    {
+                      model: Product,
+                    }
+                  ]
+                }
+              ]
+          }]
+      })
+      res.json(singleUser[0])
+    }
   } catch (err) {
     next(err)
   }
@@ -84,10 +89,14 @@ router.get('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const user = await User.destroy({
-      where: {id: req.params.id}
-    })
-    res.json(user)
+    if (!req.user.isAdmin) {
+      res.send('NO')
+    } else {
+      const user = await User.destroy({
+        where: {id: req.params.id}
+      })
+      res.json(user)
+    }
   } catch (error) {
     console.log(error)
   }
