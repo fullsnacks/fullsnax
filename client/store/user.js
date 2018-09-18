@@ -112,21 +112,17 @@ export const getUserCart = id => async dispatch => {
     const promoUsed = userInfo.orders[0].promoUsed
     const cartObj = userInfo.orders[0].sales.reduce(
       (accumulator, currentVal) => {
-        if (accumulator.hasOwnProperty(currentVal.product.name)) {
-          accumulator[currentVal.product.name].quantity += currentVal.quantity
-        } else {
-          accumulator[currentVal.product.name] = {}
-          accumulator[currentVal.product.name].quantity = currentVal.quantity
-          accumulator[currentVal.product.name].price = currentVal.purchasePrice
-        }
+        accumulator[currentVal.product.name] = {}
+        accumulator[currentVal.product.name].saleId = currentVal.id
+        accumulator[currentVal.product.name].quantity = currentVal.quantity
+        accumulator[currentVal.product.name].price = currentVal.purchasePrice
         return accumulator
-      },
-      {}
-    )
+      }, {})
     const userCart = Object.keys(cartObj).reduce((accumulator, currentVal) => {
       const newObj = {
         promoUsed: promoUsed,
         id: orderId,
+        saleId: cartObj[currentVal].saleId,
         name: currentVal,
         quantity: cartObj[currentVal].quantity,
         price: cartObj[currentVal].price

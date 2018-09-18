@@ -1,16 +1,17 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchCart} from '../store/orders'
+import {fetchCart, deleteSale} from '../store/orders'
 import {me, getUserCart} from '../store/user'
 import {Link} from 'react-router-dom'
 
-class Checkout extends Component {
+class Cart extends Component {
   constructor(props) {
     super(props)
     this.state = {
       cart: []
     }
     this.getCartTotal = this.getCartTotal.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
   getCartTotal(cart) {
     return cart.reduce((accumulator, currentVal) => {
@@ -21,6 +22,22 @@ class Checkout extends Component {
 
   async componentDidMount() {
     await this.props.me()
+    if (this.props.user.id) {
+      const id = this.props.user.id
+      await this.props.getUserCart(id)
+      this.setState({
+        cart: this.props.userCart
+      })
+    } else {
+      await this.props.getCart()
+      this.setState({
+        cart: this.props.guestCart
+      })
+    }
+  }
+
+  async handleDelete(id) {
+    this.props.deleteSale(id);
     if (this.props.user.id) {
       const id = this.props.user.id
       await this.props.getUserCart(id)
@@ -51,7 +68,10 @@ class Checkout extends Component {
             >
               <h6 style={{margin: '15px'}}>{item.name}</h6>
               <div style={{textAlign: 'center'}}>
-                <h6 style={{margin: '15px'}}>Quantity:{item.quantity}</h6>
+                <h6 style={{margin: '15px'}}>
+                  Quantity:{item.quantity}
+                </h6>
+                <button onClick={() => this.handleDelete(item.saleId)}>Delete</button>
               </div>
             </div>
           )
@@ -74,7 +94,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCart: id => dispatch(fetchCart(id)),
   me: () => dispatch(me()),
-  getUserCart: id => dispatch(getUserCart(id))
+  getUserCart: id => dispatch(getUserCart(id)),
+  deleteSale: id => dispatch(deleteSale(id)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
