@@ -4,53 +4,66 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const tempStyles = {
-  height: '60px',
-  display: 'flex',
-  lineHeight: '60px',
-  verticalAlign: 'middle'
-}
+// const logoStyle = {
 
-const logoStyle = {
-  fontFamily: 'Luckiest Guy',
-  fontSize: '2em',
-  textShadow: '2px 2px black',
-  color: 'orange',
-  textOutline: 'black'
-}
+// }
 
 const tempCartStyle = {
-  marginBottom: '-6px',
-  height: '25px'
+
 }
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <nav style={tempStyles}>
-      <a href="/">
-        <h1 style={logoStyle}>FULLSNAXX</h1>
-      </a>
+  <div className="navbar">
+    <ul>
+      <Link to="/">
+        <li>
+          <h1 className="navbar-brand">FULLSNAXX</h1>
+        </li>
+      </Link>
       {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/myAccount">My Account</Link>
-          <Link to="/products">Products</Link>
+        <div className="navbar-links">
+          <Link to="/products">
+            <li>Products</li>
+          </Link>
           <a href="#" onClick={handleClick}>
-            Logout
+            <li>Logout</li>
           </a>
-          <Link to="/cart"><img src="/cart.png" style={tempCartStyle} alt="cart"/></Link>
+          <Link to="/myAccount">
+            <li>My Account</li>
+          </Link>
+          <Link to="/cart" className="navbar-cart">
+            <li >
+              <img
+                src="/cart.png"
+                className="navbar-cart"
+                alt="cart"
+              />
+            </li>
+          </Link>
         </div>
       ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/products">Products</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/cart"><img src="/cart.png" style={tempCartStyle} alt="cart"/></Link>
+        <div className="navbar-links">
+          <Link to="/products">
+            <li>Products</li>
+          </Link>
+          <Link to="/login">
+            <li>Login</li>
+          </Link>
+          <Link to="/signup">
+            <li>Sign Up</li>
+          </Link>
+          <Link to="/cart" className="navbar-cart">
+            <li >
+              <img
+                src="/cart.png"
+                className="navbar-cart"
+                alt="cart"
+              />
+            </li>
+          </Link>
         </div>
       )}
-    </nav>
-    <hr />
+    </ul>
   </div>
 )
 

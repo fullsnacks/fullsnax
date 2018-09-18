@@ -1,23 +1,12 @@
 body {
   font-family: sans-serif;
   background-color: lightblue;
+  margin: 95px 0 0 0;
+  padding: 0;
 }
 
 a {
   text-decoration: none;
-}
-
-label {
-  display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
-nav h1 {
-  margin-top: 0;
 }
 
 form div {
@@ -25,4 +14,67 @@ form div {
   display: inline-block;
 }
 
+.navbar {
+  background-color: #ff0f83;
+  height: 75px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0px 3px 6px 3px rgba(0,0,0,0.55);
+}
 
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.navbar li {
+  color: #fff;
+  display: block;
+  float: left;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-decoration: none;
+  height: 75px;
+  line-height: 75px;
+}
+
+.navbar-brand {
+  font-family: 'Luckiest Guy';
+  font-size: 2em;
+  text-shadow: 2px 2px black;
+  color: orange;
+  margin: 0;
+  float: left;
+}
+
+.navbar-brand:hover {
+  color: rgb(0, 195, 255);
+}
+
+.navbar-links a {
+  float: left;
+  color: white;
+  margin: 0 5px;
+  height: 75px;
+}
+
+.navbar-cart {
+  float: right;
+  margin-top: 20px;
+  height: 30px;
+}
+
+.navbar-links a:hover {
+  background-color: #c60057;
+  outline: none;
+  cursor: pointer;
+}
+
+/* .navbar-links ul li:hover > ul,
+ul li:focus-within > ul, {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+} */
