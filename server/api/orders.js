@@ -46,14 +46,17 @@ router.put('/:orderId', async (req, res, next) => {
 
     await Order.update({isCart: false}, {where: {id: orderId}})
 
-    // const sales = await Sale.findAll({where: {orderId: orderId}})
+    const sales = await Sale.findAll({where: {orderId: orderId}})
 
-    // sales.forEach(async sale => {
-    //   const product = await Product.findById(sale.productId)
-    //   if (product.price !== sale.purchasePrice) {
-    //     await Sale.update({purchasePrice: product.price})
-    //   }
-    // })
+    sales.forEach(async sale => {
+      const product = await Product.findById(sale.productId)
+      if (product.price !== sale.purchasePrice) {
+        await Sale.update(
+          {purchasePrice: product.price},
+          {where: {id: sale.id}}
+        )
+      }
+    })
 
     res.status(200).send()
   } catch (error) {
