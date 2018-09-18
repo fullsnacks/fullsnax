@@ -4,6 +4,9 @@ const {Product} = require('../db/models')
 const {Order} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
+  if (!req.user || !req.user.isAdmin) {
+    res.send('ACCESS DENIED')
+  } else {
   try {
     const orders = await Order.findAll({
       where: {
@@ -14,9 +17,12 @@ router.get('/', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
-})
+}})
 
 router.get('/:sessionId', async (req, res, next) => {
+  if (req.session.id !== req.params.sessionId || !req.user.isAdmin) {
+    res.send('ACCESS DENIED')
+  } else {
   try {
     const sessionId = req.params.sessionId
     const session = await Order.findOne({
@@ -38,7 +44,7 @@ router.get('/:sessionId', async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-})
+}})
 
 router.put('/:orderId/applyPromo', async (req, res, next) => {
   try {

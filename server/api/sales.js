@@ -7,14 +7,14 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const sales = await Sale.findAll({
-      include: [
-        {
-          model: Product
-        }
-      ]
-    })
-    res.json({sales})
+    if (!req.user || !req.user.isAdmin) {
+      res.status(401).send('ACCESS DENIED')
+    } else {
+      const sales = await Sale.findAll({
+        include: [{ model: Product }]
+      })
+      res.json({sales})
+      }
   } catch (err) {
     next(err)
   }
@@ -22,7 +22,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    let {quantity, purchasePrice, productId} = req.body
+    const {quantity, purchasePrice, productId} = req.body
     if (!req.session.guestId) {
       req.session.guestId = req.sessionID
     }
