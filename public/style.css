@@ -30,7 +30,8 @@ form div {
 }
 
 .navbar li {
-  color: #fff;
+  color: rgb(255, 248, 238);
+  text-shadow: .5px .5px black;
   display: block;
   float: left;
   padding: 0.5rem 1rem;
@@ -50,12 +51,12 @@ form div {
 }
 
 .navbar-brand:hover {
-  color: rgb(0, 195, 255);
+  color: rgb(104, 197, 228);
 }
 
 .navbar-links a {
   float: left;
-  color: white;
+  color: orange;
   margin: 0 5px;
   height: 75px;
 }
@@ -96,13 +97,13 @@ form div {
 }
 
 .product-card {
-  border: 2px solid black;
+  border: 1.35px solid black;
   width: 170px;
   height: 170px;
   margin: 10px;
   text-align: center;
-  background-color: antiquewhite;
-  box-shadow: 2px 9px 14px 2px rgba(0,0,0,0.75);
+  background-color: rgb(255, 248, 238);
+  box-shadow: 2px 3px 14px -4px rgba(0,0,0,0.75);
   border-radius: 8px;
 }
 
@@ -115,4 +116,8 @@ form div {
   height: 100px;
   width: 140px;
   object-fit: contain;
+}
+
+.single-product {
+  text-align: center
 }
