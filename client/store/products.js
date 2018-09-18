@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 const initialState = {
   products: [],
@@ -42,6 +43,7 @@ export const makeSale = state => async dispatch => {
   try {
     await axios.post('/api/sales', state)
     dispatch(putSale())
+    history.push('/cart')
   } catch (error) {
     console.log(error)
   }
