@@ -1,10 +1,5 @@
 import React from 'react'
 
-
-const imgStyle = {
-
-}
-
 const Product = props => {
   const {product} = props
   return (
