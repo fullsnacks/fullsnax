@@ -3,14 +3,16 @@ import axios from 'axios'
 const GET_ORDERS = 'GET_ORDERS'
 const GET_CART = 'GET_CART'
 const COMPLETE_ORDER = 'COMPLETE_ORDER'
+const PUT_PROMO = 'PUT_PROMO'
 
 const initialState = {orders: [], cart: []}
 
 const getOrders = orders => ({type: GET_ORDERS, orders})
 const getCart = cart => ({type: GET_CART, cart})
 const completeOrder = () => ({
-  type: COMPLETE_ORDER,
+  type: COMPLETE_ORDER
 })
+const putPromo = cart => ({type: PUT_PROMO, cart})
 
 export const fetchOrders = () => {
   return async dispatch => {
@@ -37,13 +39,14 @@ export const fetchCart = () => {
           accumulator[currentVal.product.name] = {}
           accumulator[currentVal.product.name].id = currentVal.orderId
           accumulator[currentVal.product.name].quantity = currentVal.quantity
-          accumulator[currentVal.product.name].price = currentVal.product.price
+          accumulator[currentVal.product.name].price = currentVal.purchasePrice
         }
         return accumulator
       }, {})
       const guestCart = Object.keys(cartObj).reduce(
         (accumulator, currentVal) => {
           const newObj = {
+            promoUsed: cart.promoUsed,
             name: currentVal,
             id: cartObj[currentVal].id,
             quantity: cartObj[currentVal].quantity,
@@ -65,9 +68,18 @@ export const fetchCart = () => {
 export const finishOrder = orderId => async dispatch => {
   try {
     await axios.put(`/api/orders/${orderId}`)
-    dispatch(completeOrder());
+    dispatch(completeOrder())
   } catch (error) {
-    console.log(error);
+    console.log(error)
+  }
+}
+
+export const setPromo = orderId => async dispatch => {
+  try {
+    const cart = await axios.put(`/api/orders/${orderId}/applyPromo`)
+    dispatch(putPromo(cart))
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -79,6 +91,8 @@ export default function(state = initialState, action) {
       return {...state, cart: action.cart}
     case COMPLETE_ORDER:
       return {...state, cart: []}
+    case PUT_PROMO:
+      return {...state, cart: action.cart}
     default:
       return state
   }

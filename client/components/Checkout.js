@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchCart, finishOrder} from '../store/orders'
+import {fetchCart, finishOrder, setPromo} from '../store/orders'
 import {me, getUserCart, finishUserOrder} from '../store/user'
 
 class Checkout extends Component {
@@ -8,7 +8,7 @@ class Checkout extends Component {
     super(props)
     this.state = {
       cart: this.props.userCart,
-      promoUsed: false,
+      promoUsed: this.props.userCart.promoUsed
     }
     this.getCartTotal = this.getCartTotal.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,35 +27,47 @@ class Checkout extends Component {
       const id = this.props.user.id
       await this.props.getUserCart(id)
       this.setState({
-        cart: this.props.userCart
+        cart: this.props.userCart,
+        promoUsed: this.props.userCart[0].promoUsed
       })
     } else {
       await this.props.getCart()
       this.setState({
-        cart: this.props.guestCart
+        cart: this.props.guestCart,
+        promoUsed: this.props.guestCart[0].promoUsed
       })
     }
+    console.log(this.props.userCart[0].promoUsed)
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    const cartId = this.state.cart[0].id;
+    const cartId = this.state.cart[0].id
     if (!this.props.user.id) {
-      this.props.finishOrder(cartId);
+      this.props.finishOrder(cartId)
     } else {
-      this.props.finishUserOrder(cartId);
+      this.props.finishUserOrder(cartId)
     }
     this.props.history.push('/orderComplete')
   }
 
   handlePromo(event) {
     event.preventDefault()
-    if (event.target.promo.value.toLowerCase() === 'dakotaisaloser') {
-      const newCart = this.state.cart.map(sale => ({...sale, price: Number((sale.price / 2).toFixed(0)) }))
+
+    if (
+      event.target.promo.value.toLowerCase() === 'dakotaisaloser' &&
+      !this.state.promoUsed
+    ) {
+      const newCart = this.state.cart.map(sale => ({
+        ...sale,
+        price: Number((sale.price / 2).toFixed(0))
+      }))
       this.setState({
         cart: newCart,
-        promoUsed: true,
+        promoUsed: true
       })
+      const cartId = this.state.cart[0].id
+      this.props.setPromo(cartId)
     }
   }
 
@@ -81,14 +93,15 @@ class Checkout extends Component {
           )
         })}
         <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
-        {!promoUsed &&
-        <div>
-          <form onSubmit={this.handlePromo}>
-            <label htmlFor="promo">Have a promo code?</label>
-            <input type="text" name="promo"/>
-            <button type="submit">Apply</button>
-          </form>
-        </div>}
+        {!promoUsed && (
+          <div>
+            <form onSubmit={this.handlePromo}>
+              <label htmlFor="promo">Have a promo code?</label>
+              <input type="text" name="promo" />
+              <button type="submit">Apply</button>
+            </form>
+          </div>
+        )}
         <h5>Please enter your shipping information:</h5>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="">Street Address</label>
@@ -118,6 +131,7 @@ const mapDispatchToProps = dispatch => ({
   getUserCart: id => dispatch(getUserCart(id)),
   finishOrder: id => dispatch(finishOrder(id)),
   finishUserOrder: id => dispatch(finishUserOrder(id)),
+  setPromo: id => dispatch(setPromo(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
