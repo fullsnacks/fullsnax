@@ -8,6 +8,10 @@ const Order = db.define('order', {
   isCart: {
     type: Sequelize.BOOLEAN,
     defaultValue: true
+  },
+  promoUsed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 

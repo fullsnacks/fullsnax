@@ -39,7 +39,7 @@ const getPastOrders = pastOrders => ({
 })
 
 const completeOrder = () => ({
-  type: COMPLETE_ORDER,
+  type: COMPLETE_ORDER
 })
 
 /**
@@ -109,6 +109,7 @@ export const getUserCart = id => async dispatch => {
   try {
     const {data: userInfo} = await axios.get(`/api/users/${id}/currentOrder`)
     const orderId = userInfo.orders[0].id
+    const promoUsed = userInfo.orders[0].promoUsed
     const cartObj = userInfo.orders[0].sales.reduce(
       (accumulator, currentVal) => {
         if (accumulator.hasOwnProperty(currentVal.product.name)) {
@@ -116,7 +117,7 @@ export const getUserCart = id => async dispatch => {
         } else {
           accumulator[currentVal.product.name] = {}
           accumulator[currentVal.product.name].quantity = currentVal.quantity
-          accumulator[currentVal.product.name].price = currentVal.product.price
+          accumulator[currentVal.product.name].price = currentVal.purchasePrice
         }
         return accumulator
       },
@@ -124,6 +125,7 @@ export const getUserCart = id => async dispatch => {
     )
     const userCart = Object.keys(cartObj).reduce((accumulator, currentVal) => {
       const newObj = {
+        promoUsed: promoUsed,
         id: orderId,
         name: currentVal,
         quantity: cartObj[currentVal].quantity,
@@ -147,7 +149,7 @@ export const getGuest = () => async dispatch => {
   }
 }
 
-export const fetchPastOrders = (id) => async dispatch => {
+export const fetchPastOrders = id => async dispatch => {
   try {
     const response = await axios.get(`/api/users/${id}`)
     const orders = response.data.orders
@@ -160,9 +162,9 @@ export const fetchPastOrders = (id) => async dispatch => {
 export const finishUserOrder = id => async dispatch => {
   try {
     await axios.put(`/api/orders/${id}`)
-    dispatch(completeOrder());
+    dispatch(completeOrder())
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
