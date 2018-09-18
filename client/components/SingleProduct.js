@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct, makeSale} from '../store/products'
-import axios from 'axios'
 
 const imgStyle = {
   maxWidth: '400px',
@@ -36,7 +35,7 @@ class SingleProduct extends Component {
         purchasePrice: this.props.products.singleProduct.price,
         productId: this.props.products.singleProduct.id
       })
-      makeSale(this.state)
+      this.props.makeSale(this.state)
       this.props.history.push('/cart')
     } catch (error) {
       alert(error)
