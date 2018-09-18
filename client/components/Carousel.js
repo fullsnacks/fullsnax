@@ -22,7 +22,7 @@ class Carousel extends Component {
       this.setState({
         currentImageIndex: (currentIdx + 1) % imgUrls.length
       })
-    }, 2500)
+    }, 1500)
     this.setState({
       switcher
     })

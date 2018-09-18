@@ -9,7 +9,7 @@ const products = [
     inventory: 10,
     description: 'You know what Cheetos are.',
     category: 'chips',
-    imageUrl: 'https://target.scene7.com/is/image/Target/13326809_Alt02?wid=488&hei=488&fmt=pjpeg'
+    imageUrl: '/productImgs/cheetos.png'
   },
   {
     name: 'Freetos',
@@ -17,7 +17,7 @@ const products = [
     inventory: 10,
     description: 'These are Freetos. (Note: these are not Cheetos)',
     category: 'chips',
-    imageUrl: 'https://www.fritolay.com/images/default-source/blue-bag-image/fritos-original.png?sfvrsn=b704563a_2'
+    imageUrl: '/productImgs/fritos.png'
   },
   {
     name: 'Oreos',
@@ -25,7 +25,7 @@ const products = [
     inventory: 5,
     description: 'Chocolate cookies surround a wonderful, creamy center.',
     category: 'cookies',
-    imageUrl: 'https://images.csmonitor.com/csm/2013/10/1016-oreos-addictive.jpg?alias=standard_900x600'
+    imageUrl: '/productImgs/oreos.png'
   },
   {
     name: 'Ring-Pop',
@@ -33,7 +33,7 @@ const products = [
     inventory: 100,
     description: 'This 90s classic is simultaneously jewelery and candy.',
     category: 'candy',
-    imageUrl: 'https://sep.yimg.com/ay/candy-crate/ring-pops-24ct-6.gif'
+    imageUrl: '/productImgs/ringpop.png'
   },
   {
     name: 'Snufflebars',
@@ -41,7 +41,7 @@ const products = [
     inventory: 10,
     description: 'No one knows what these are.',
     category: 'other',
-    imageUrl: 'http://fishtownbeerrunners.com/wp-content/uploads/2013/09/WC8Or71o13c2832333739383C8Or71oq_1266122155.jpg'
+    imageUrl: '/productImgs/snufflebars.png'
   },
   {
     name: 'Hot Cheetos',
@@ -49,7 +49,7 @@ const products = [
     inventory: 10,
     description: 'Like regular Cheetos, but hotter and more expensive.',
     category: 'chips',
-    imageUrl: 'https://target.scene7.com/is/image/Target/12992238?wid=488&hei=488&fmt=pjpeg'
+    imageUrl: '/productImgs/hotCheetos.png'
   },
   {
     name: 'Doritos',
@@ -57,7 +57,7 @@ const products = [
     inventory: 20,
     description: 'The healthiest product we sell.',
     category: 'chips',
-    imageUrl: 'https://media.glamour.com/photos/5a788e516a41a70bc017a59d/master/w_644,c_limit/GettyImages-91692426.jpg'
+    imageUrl: '/productImgs/doritos.png'
   },
   {
     name: 'Pringles',
@@ -66,7 +66,7 @@ const products = [
     description:
       'We only carry original Pringles because we exclusively serve snacks to sociopaths.',
     category: 'chips',
-    imageUrl: 'http://stuffpoint.com/pringles/image/44131-pringles-original.jpg'
+    imageUrl: '/productImgs/pringles.png'
   },
   {
     name: 'String Cheese',
@@ -74,7 +74,7 @@ const products = [
     inventory: 10,
     description: 'Made from 100% string cows.',
     category: 'other',
-    imageUrl: 'http://s3.envato.com/files/243799501/_00A4433.jpg'
+    imageUrl: '/productImgs/stringCheese.png'
   },
   {
     name: 'Raisinets',
@@ -82,7 +82,7 @@ const products = [
     inventory: 10,
     description: 'Really old grapes dunked in chocolate.',
     category: 'chocolate',
-    imageUrl: 'https://sep.yimg.com/ay/candy-crate/raisinets-theater-size-box-3-5oz-6.gif'
+    imageUrl: '/productImgs/raisinets.gif'
   },
   {
     name: `Welch's Fruit Snacks`,
@@ -90,16 +90,16 @@ const products = [
     inventory: 100,
     description: 'You thought these were sold exclusively on the subway, huh?',
     category: 'candy',
-    imageUrl: 'https://www.kroger.com/product/images/xlarge/front/0003485615040'
+    imageUrl: '/productImgs/welchs.png'
   },
   {
-    name: 'Gummy Bears',
-    price: 300,
+    name: 'Gummy Bear',
+    price: 50000,
     inventory: 25,
     description:
-      'Raised in the Gummy Forest without antibiotics and harvested in a humane way',
+      'Raised in the Gummy Forest without antibiotics and harvested in a humane way.',
     category: 'candy',
-    imageUrl: 'https://cdn.candynation.com/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/g/o/gold_bears__12117.jpg'
+    imageUrl: '/productImgs/gummyBear.png'
   },
   {
     name: 'Swedish Fish',
@@ -107,7 +107,7 @@ const products = [
     inventory: 30,
     description: 'Sweden is famous for these boneless, red fish.',
     category: 'candy',
-    imageUrl: 'https://cdn.influenster.com/media/product/image/swedish-fish-red-theater-size-boxes-12ct-3.jpg.750x750_q85ss0_progressive.jpg'
+    imageUrl: '/productImgs/welchs.png'
   },
   {
     name: 'Chocolate Chip Cookies',
@@ -116,7 +116,7 @@ const products = [
     description:
       'A collaboration with Paula Deen that calls for a stick of butter per cookie.',
     category: 'cookies',
-    imageUrl: 'https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg'
+    imageUrl: '/productImgs/cookies.jpg'
   },
   {
     name: 'Twizzlers',
@@ -124,15 +124,15 @@ const products = [
     inventory: 100,
     description: 'Does anyone actually like these?',
     category: 'candy',
-    imageUrl: 'https://i.ytimg.com/vi/TkImmx8aV2c/maxresdefault.jpg'
+    imageUrl: '/productImgs/twizzlers.png'
   },
   {
     name: `Chester's Hot Fries`,
     price: 200,
     inventory: 50,
-    description: `FLAMIN' HOTTTTTTTT (Wait...isn't that the Cheetos guy?)`,
+    description: `FLAMIN' HOTTTTTTTT!!! (Wait...isn't that the Cheetos guy?)`,
     category: 'chips',
-    imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/919m6aEGt3L._SL1500_.jpg'
+    imageUrl: '/productImgs/chesters.png'
   }
 ]
 
