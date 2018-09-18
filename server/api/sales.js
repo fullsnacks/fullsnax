@@ -22,7 +22,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const {quantity, purchasePrice, productId} = req.body
+    let {quantity, purchasePrice, productId} = req.body
     if (!req.session.guestId) {
       req.session.guestId = req.sessionID
     }
@@ -30,7 +30,7 @@ router.post('/', async (req, res, next) => {
       ? await Order.findOrCreate({
           where: {
             isCart: true,
-            userId: req.user.id,
+            userId: req.user.id
           }
         })
       : await Order.findOrCreate({
@@ -39,7 +39,9 @@ router.post('/', async (req, res, next) => {
             sessionId: req.session.guestId
           }
         })
-
+    if (order[0].promoUsed) {
+      purchasePrice = purchasePrice / 2
+    }
     const productDuplicate = await Sale.findOne({
       where: {
         orderId: order[0].id,
@@ -47,20 +49,24 @@ router.post('/', async (req, res, next) => {
       }
     })
     if (productDuplicate) {
-      await Sale.update({
-        quantity: Sequelize.literal(`quantity + ${quantity}`)}, {
+      await Sale.update(
+        {
+          quantity: Sequelize.literal(`quantity + ${quantity}`)
+        },
+        {
           where: {
             orderId: order[0].id,
             productId: productId
           }
-        })
+        }
+      )
     } else {
-    await Sale.create({
-      quantity,
-      purchasePrice,
-      productId,
-      orderId: order[0].id
-    })
+      await Sale.create({
+        quantity,
+        purchasePrice,
+        productId,
+        orderId: order[0].id
+      })
     }
     res.status(201).send()
   } catch (error) {
