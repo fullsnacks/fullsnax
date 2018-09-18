@@ -1,13 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Product from './Product'
+import ProductCard from './ProductCard'
 import {getProducts} from '../store/products'
 import {NavLink} from 'react-router-dom'
-
-const tempStyles = {
-  display: 'flex',
-  flexWrap: 'wrap'
-}
 
 class AllProducts extends Component {
   constructor(props) {
@@ -33,27 +28,35 @@ class AllProducts extends Component {
     const {filterText} = this.state
     return (
       products.length && (
-        <div>
+        <div className="products">
           <h1>Our Products:</h1>
-          <label htmlFor="filterText">Search by name:</label>
-          <br />
-          <input
-            type="text"
-            name="filterText"
-            value={filterText}
-            onChange={this.handleChange}
-          />
-          <form onChange={this.handleChange}>
-            <select name="" id="">
-              <option value="">All</option>
-              <option value="candy">Candy</option>
-              <option value="chips">Chips</option>
-              <option value="chocolate">Chocolate</option>
-              <option value="cookies">Cookies</option>
-              <option value="other">Other</option>
-            </select>
-          </form>
-          <div style={tempStyles}>
+          <div className="products-search">
+            <div className="products-search-filter">
+              <label htmlFor="filterText">Search by name:</label>
+              <br />
+              <input
+                type="text"
+                name="filterText"
+                value={filterText}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="products-search-select">
+              <form onChange={this.handleChange}>
+                <label htmlFor="">Filter by category</label>
+                <br/>
+                <select name="" id="">
+                  <option value="">All</option>
+                  <option value="candy">Candy</option>
+                  <option value="chips">Chips</option>
+                  <option value="chocolate">Chocolate</option>
+                  <option value="cookies">Cookies</option>
+                  <option value="other">Other</option>
+                </select>
+              </form>
+            </div>
+          </div>
+          <div className="products-display">
             {products
               .filter(
                 product =>
@@ -66,7 +69,7 @@ class AllProducts extends Component {
               )
               .map(product => (
                 <NavLink key={product.id} to={`/products/${product.id}`}>
-                  <Product product={product} key={product.id} />
+                  <ProductCard product={product} key={product.id} />
                 </NavLink>
               ))}
           </div>
