@@ -10,8 +10,12 @@ class Users extends Component {
 
   render() {
     const {users} = this.props
+    console.log('USERS', users)
     if (!users) {
       return <div>loading...</div>
+    }
+    if (!Array.isArray(users)) {
+      return <div>No access!</div>
     } else
       return (
         users.length && (
