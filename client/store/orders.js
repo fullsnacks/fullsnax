@@ -14,9 +14,9 @@ const completeOrder = () => ({
   type: COMPLETE_ORDER
 })
 const putPromo = cart => ({type: PUT_PROMO, cart})
-const deleteFromOrder = (saleId) => ({
+const deleteFromOrder = saleId => ({
   type: DELETE_FROM_ORDER,
-  saleId,
+  saleId
 })
 
 export const fetchOrders = () => {
@@ -89,9 +89,9 @@ export const setPromo = orderId => async dispatch => {
 export const deleteSale = saleId => async dispatch => {
   try {
     await axios.delete(`/api/sales/${saleId}`)
-    dispatch(deleteFromOrder(saleId));
+    dispatch(deleteFromOrder(saleId))
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
@@ -106,10 +106,10 @@ export default function(state = initialState, action) {
     case PUT_PROMO:
       return {...state, cart: action.cart}
     case DELETE_FROM_ORDER:
-      return {...state, cart: state.cart.filter(sale => {
-        console.log('from sale', sale.saleId, 'from action', action.saleId)
-        sale.saleId !== action.saleId
-      })}
+      return {
+        ...state,
+        cart: state.cart.filter(sale => sale.saleId !== action.saleId)
+      }
     default:
       return state
   }

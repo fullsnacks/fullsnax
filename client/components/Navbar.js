@@ -8,9 +8,7 @@ import {logout} from '../store'
 
 // }
 
-const tempCartStyle = {
-
-}
+const tempCartStyle = {}
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="navbar">
@@ -32,12 +30,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <li>My Account</li>
           </Link>
           <Link to="/cart" className="navbar-cart">
-            <li >
-              <img
-                src="/cart.png"
-                className="navbar-cart"
-                alt="cart"
-              />
+            <li>
+              <img src="/cart.png" className="navbar-cart" alt="cart" />
             </li>
           </Link>
         </div>
@@ -53,12 +47,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <li>Sign Up</li>
           </Link>
           <Link to="/cart" className="navbar-cart">
-            <li >
-              <img
-                src="/cart.png"
-                className="navbar-cart"
-                alt="cart"
-              />
+            <li>
+              <img src="/cart.png" className="navbar-cart" alt="cart" />
             </li>
           </Link>
         </div>

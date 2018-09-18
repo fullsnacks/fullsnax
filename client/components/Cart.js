@@ -37,7 +37,7 @@ class Cart extends Component {
   }
 
   async handleDelete(id) {
-    await this.props.deleteSale(id);
+    await this.props.deleteSale(id)
     if (this.props.user.id) {
       const id = this.props.user.id
       await this.props.getUserCart(id)
@@ -55,34 +55,38 @@ class Cart extends Component {
   render() {
     const {cart} = this.state
     if (!cart.length) {
-      return <div style={{textAlign: 'center'}} >
-        <img src='/cookieMonster.jpg'></img>
-      </div>
+      return (
+        <div style={{textAlign: 'center'}}>
+          <img src="/cookieMonster.jpg" />
+        </div>
+      )
     }
-    return cart.length && (
-      <div>
-        <h4>Your current shopping cart:</h4>
-        {cart.map(item => {
-          return (
-            <div
-              key={item.name}
-              style={{display: 'flex', border: '1px solid black'}}
-            >
-              <h6 style={{margin: '15px'}}>{item.name}</h6>
-              <div style={{textAlign: 'center'}}>
-                <h6 style={{margin: '15px'}}>
-                  Quantity:{item.quantity}
-                </h6>
-                <button onClick={() => this.handleDelete(item.saleId)}>Delete</button>
+    return (
+      cart.length && (
+        <div>
+          <h4>Your current shopping cart:</h4>
+          {cart.map(item => {
+            return (
+              <div
+                key={item.name}
+                style={{display: 'flex', border: '1px solid black'}}
+              >
+                <h6 style={{margin: '15px'}}>{item.name}</h6>
+                <div style={{textAlign: 'center'}}>
+                  <h6 style={{margin: '15px'}}>Quantity:{item.quantity}</h6>
+                  <button onClick={() => this.handleDelete(item.saleId)}>
+                    Delete
+                  </button>
+                </div>
               </div>
-            </div>
-          )
-        })}
-        <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
-        <Link to="/checkout">
-          <button>GO TO CHECKOUT</button>
-        </Link>
-      </div>
+            )
+          })}
+          <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
+          <Link to="/checkout">
+            <button>GO TO CHECKOUT</button>
+          </Link>
+        </div>
+      )
     )
   }
 }
@@ -97,7 +101,7 @@ const mapDispatchToProps = dispatch => ({
   getCart: id => dispatch(fetchCart(id)),
   me: () => dispatch(me()),
   getUserCart: id => dispatch(getUserCart(id)),
-  deleteSale: id => dispatch(deleteSale(id)),
+  deleteSale: id => dispatch(deleteSale(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

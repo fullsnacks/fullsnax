@@ -37,7 +37,6 @@ class Checkout extends Component {
         promoUsed: this.props.guestCart[0].promoUsed
       })
     }
-    console.log(this.props.userCart[0].promoUsed)
   }
 
   handleSubmit(event) {

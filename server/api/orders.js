@@ -7,44 +7,46 @@ router.get('/', async (req, res, next) => {
   if (!req.user || !req.user.isAdmin) {
     res.send('ACCESS DENIED')
   } else {
-  try {
-    const orders = await Order.findAll({
-      where: {
-        isCart: false
-      }
-    })
-    res.send(orders)
-  } catch (err) {
-    next(err)
+    try {
+      const orders = await Order.findAll({
+        where: {
+          isCart: false
+        }
+      })
+      res.send(orders)
+    } catch (err) {
+      next(err)
+    }
   }
-}})
+})
 
 router.get('/:sessionId', async (req, res, next) => {
   if (req.session.id !== req.params.sessionId || !req.user.isAdmin) {
     res.send('ACCESS DENIED')
   } else {
-  try {
-    const sessionId = req.params.sessionId
-    const session = await Order.findOne({
-      where: {
-        sessionId: sessionId
-      },
-      include: [
-        {
-          model: Sale,
-          include: [
-            {
-              model: Product
-            }
-          ]
-        }
-      ]
-    })
-    res.send(session)
-  } catch (error) {
-    next(error)
+    try {
+      const sessionId = req.params.sessionId
+      const session = await Order.findOne({
+        where: {
+          sessionId: sessionId
+        },
+        include: [
+          {
+            model: Sale,
+            include: [
+              {
+                model: Product
+              }
+            ]
+          }
+        ]
+      })
+      res.send(session)
+    } catch (error) {
+      next(error)
+    }
   }
-}})
+})
 
 router.put('/:orderId/applyPromo', async (req, res, next) => {
   try {

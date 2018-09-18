@@ -13,7 +13,7 @@ describe('UserHome', () => {
   let userHome
 
   beforeEach(() => {
-    userHome = shallow(<UserHome user={firstName="Cody"} />)
+    userHome = shallow(<UserHome user={(firstName = 'Cody')} />)
   })
 
   xit('renders the name in an h2', () => {

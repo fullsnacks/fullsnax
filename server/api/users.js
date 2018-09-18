@@ -17,7 +17,10 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id/currentOrder', async (req, res, next) => {
   try {
-    if (!req.user || Number(req.user.id) !== Number(req.params.id) && req.user.isAdmin) {
+    if (
+      !req.user ||
+      (Number(req.user.id) !== Number(req.params.id) && req.user.isAdmin)
+    ) {
       res.send('No, Corey. No.')
     } else {
       const userId = req.params.id
@@ -53,7 +56,6 @@ router.get('/:id/currentOrder', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    console.log('REQ USER', req.user.id, req.params.id)
     if (Number(req.user.id) !== Number(req.params.id) && !req.user.isAdmin) {
       res.send('You no go here')
     } else {
@@ -64,21 +66,23 @@ router.get('/:id', async (req, res, next) => {
         },
         include: [
           {
-            model: Order, required: false,
-              where: {
-                isCart: false
-              },
-              include: [
-                {
-                  model: Sale,
-                  include: [
-                    {
-                      model: Product,
-                    }
-                  ]
-                }
-              ]
-          }]
+            model: Order,
+            required: false,
+            where: {
+              isCart: false
+            },
+            include: [
+              {
+                model: Sale,
+                include: [
+                  {
+                    model: Product
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       })
       res.json(singleUser[0])
     }

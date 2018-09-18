@@ -5,7 +5,8 @@ const Product = props => {
   return (
     <div className="product-card">
       <h4>{product.name}</h4>
-      <img src={product.imageUrl}
+      <img
+        src={product.imageUrl}
         className="product-card-image"
         alt={product.name}
       />
