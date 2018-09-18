@@ -38,7 +38,9 @@ class Checkout extends Component {
   render() {
     const {cart} = this.state
     if (!cart.length) {
-      return <div>Cart is currently empty :((</div>
+      return <div style={{textAlign: 'center'}} >
+        <img src='/cookieMonster.jpg'></img>
+      </div>
     }
     return cart.length && (
       <div>
