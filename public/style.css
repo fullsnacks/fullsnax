@@ -36,7 +36,6 @@ form div {
   padding: 0.5rem 1rem;
   position: relative;
   text-decoration: none;
-  transition-duration: 0.5s;
   height: 75px;
   line-height: 75px;
 }
@@ -48,6 +47,10 @@ form div {
   color: orange;
   margin: 0;
   float: left;
+}
+
+.navbar-brand:hover {
+  color: rgb(0, 195, 255);
 }
 
 .navbar-links a {
@@ -63,7 +66,15 @@ form div {
   height: 30px;
 }
 
-.navbar-links a:hover, a:focus-within {
+.navbar-links a:hover {
   background-color: #c60057;
   outline: none;
+  cursor: pointer;
 }
+
+/* .navbar-links ul li:hover > ul,
+ul li:focus-within > ul, {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+} */
