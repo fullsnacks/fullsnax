@@ -38,6 +38,7 @@ class UserHome extends Component {
     }
     return total
   }
+
   return (
     <div>
       <h2>Welcome back, {user.firstName}!</h2>
