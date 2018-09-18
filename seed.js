@@ -74,7 +74,7 @@ const products = [
     inventory: 10,
     description: 'Made from 100% string cows.',
     category: 'other',
-    imageUrl: '/productImgs/stringCheese.png'
+    imageUrl: '/productImgs/stringcheese.png'
   },
   {
     name: 'Raisinets',
