@@ -35,7 +35,7 @@ class SingleProduct extends Component {
         purchasePrice: this.props.products.singleProduct.price,
         productId: this.props.products.singleProduct.id
       })
-      this.props.makeSale(this.state)
+      await this.props.makeSale(this.state)
       this.props.history.push('/cart')
     } catch (error) {
       alert(error)
