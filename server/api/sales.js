@@ -11,10 +11,10 @@ router.get('/', async (req, res, next) => {
       res.status(401).send('ACCESS DENIED')
     } else {
       const sales = await Sale.findAll({
-        include: [{ model: Product }]
+        include: [{model: Product}]
       })
       res.json({sales})
-      }
+    }
   } catch (err) {
     next(err)
   }

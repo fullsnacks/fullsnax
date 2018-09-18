@@ -117,7 +117,9 @@ export const getUserCart = id => async dispatch => {
         accumulator[currentVal.product.name].quantity = currentVal.quantity
         accumulator[currentVal.product.name].price = currentVal.purchasePrice
         return accumulator
-      }, {})
+      },
+      {}
+    )
     const userCart = Object.keys(cartObj).reduce((accumulator, currentVal) => {
       const newObj = {
         promoUsed: promoUsed,

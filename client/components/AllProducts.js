@@ -44,7 +44,7 @@ class AllProducts extends Component {
             <div className="products-search-select">
               <form onChange={this.handleChange}>
                 <label htmlFor="">Filter by category</label>
-                <br/>
+                <br />
                 <select name="" id="">
                   <option value="">All</option>
                   <option value="candy">Candy</option>
