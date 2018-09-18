@@ -4,6 +4,7 @@ const GET_ORDERS = 'GET_ORDERS'
 const GET_CART = 'GET_CART'
 const COMPLETE_ORDER = 'COMPLETE_ORDER'
 const PUT_PROMO = 'PUT_PROMO'
+const DELETE_FROM_ORDER = 'DELETE_FROM_ORDER'
 
 const initialState = {orders: [], cart: []}
 
@@ -13,6 +14,10 @@ const completeOrder = () => ({
   type: COMPLETE_ORDER
 })
 const putPromo = cart => ({type: PUT_PROMO, cart})
+const deleteFromOrder = (saleId) => ({
+  type: DELETE_FROM_ORDER,
+  saleId,
+})
 
 export const fetchOrders = () => {
   return async dispatch => {
@@ -33,14 +38,11 @@ export const fetchCart = () => {
       const response = await axios.get('/api/guestCart')
       const cart = response.data
       const cartObj = cart.sales.reduce((accumulator, currentVal) => {
-        if (accumulator.hasOwnProperty(currentVal.product.name)) {
-          accumulator[currentVal.product.name].quantity += currentVal.quantity
-        } else {
-          accumulator[currentVal.product.name] = {}
-          accumulator[currentVal.product.name].id = currentVal.orderId
-          accumulator[currentVal.product.name].quantity = currentVal.quantity
-          accumulator[currentVal.product.name].price = currentVal.purchasePrice
-        }
+        accumulator[currentVal.product.name] = {}
+        accumulator[currentVal.product.name].saleId = currentVal.id
+        accumulator[currentVal.product.name].id = currentVal.orderId
+        accumulator[currentVal.product.name].quantity = currentVal.quantity
+        accumulator[currentVal.product.name].price = currentVal.purchasePrice
         return accumulator
       }, {})
       const guestCart = Object.keys(cartObj).reduce(
@@ -49,6 +51,7 @@ export const fetchCart = () => {
             promoUsed: cart.promoUsed,
             name: currentVal,
             id: cartObj[currentVal].id,
+            saleId: cartObj[currentVal].saleId,
             quantity: cartObj[currentVal].quantity,
             price: cartObj[currentVal].price
           }
@@ -83,6 +86,15 @@ export const setPromo = orderId => async dispatch => {
   }
 }
 
+export const deleteSale = saleId => async dispatch => {
+  try {
+    await axios.delete(`/api/sales/${saleId}`)
+    dispatch(deleteFromOrder(saleId));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ORDERS:
@@ -93,6 +105,11 @@ export default function(state = initialState, action) {
       return {...state, cart: []}
     case PUT_PROMO:
       return {...state, cart: action.cart}
+    case DELETE_FROM_ORDER:
+      return {...state, cart: state.cart.filter(sale => {
+        console.log('from sale', sale.saleId, 'from action', action.saleId)
+        sale.saleId !== action.saleId
+      })}
     default:
       return state
   }

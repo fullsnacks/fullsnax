@@ -73,3 +73,14 @@ router.post('/', async (req, res, next) => {
     next(error)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await Sale.destroy({
+      where: {id: req.params.id}
+    })
+    res.send()
+  } catch (error) {
+    console.log(error)
+  }
+})
