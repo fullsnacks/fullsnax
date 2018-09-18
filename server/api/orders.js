@@ -42,32 +42,23 @@ router.get('/:sessionId', async (req, res, next) => {
 
 router.put('/:orderId', async (req, res, next) => {
   try {
-    console.log('AM I GETTING HERE')
     const orderId = req.params.orderId
-    await Order.update(
-      {
-        isCart: false
-      },
-      {
-        where: {
-          id: orderId
-        }
-      }
-    )
+
+    await Order.update({isCart: false}, {where: {id: orderId}})
+
+    // const sales = await Sale.findAll({where: {orderId: orderId}})
+
+    // sales.forEach(async sale => {
+    //   const product = await Product.findById(sale.productId)
+    //   if (product.price !== sale.purchasePrice) {
+    //     await Sale.update({purchasePrice: product.price})
+    //   }
+    // })
+
     res.status(200).send()
   } catch (error) {
     next(error)
   }
 })
-
-// router.get('/:orderId', async (req, res, next) => {
-//   try {
-//     const orderId = req.params.orderId
-//     const order = await Order.findById(orderId)
-//     res.send(order)
-//   } catch (error) {
-//     next(error)
-//   }
-// })
 
 module.exports = router

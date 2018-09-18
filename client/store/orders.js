@@ -2,11 +2,15 @@ import axios from 'axios'
 
 const GET_ORDERS = 'GET_ORDERS'
 const GET_CART = 'GET_CART'
+const COMPLETE_ORDER = 'COMPLETE_ORDER'
 
-const initialState = {orders: [], cart: {}}
+const initialState = {orders: [], cart: []}
 
 const getOrders = orders => ({type: GET_ORDERS, orders})
 const getCart = cart => ({type: GET_CART, cart})
+const completeOrder = () => ({
+  type: COMPLETE_ORDER,
+})
 
 export const fetchOrders = () => {
   return async dispatch => {
@@ -58,12 +62,23 @@ export const fetchCart = () => {
   }
 }
 
+export const finishOrder = orderId => async dispatch => {
+  try {
+    await axios.put(`/api/orders/${orderId}`)
+    dispatch(completeOrder());
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ORDERS:
       return {...state, orders: action.orders}
     case GET_CART:
       return {...state, cart: action.cart}
+    case COMPLETE_ORDER:
+      return {...state, cart: []}
     default:
       return state
   }
