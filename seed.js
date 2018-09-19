@@ -145,7 +145,8 @@ const users = [
     streetAddress: '123 Pine St.',
     city: 'New Jersey',
     state: 'NJ',
-    zip: '01245'
+    zip: '01245',
+    isAdmin: true,
   },
 
   {
