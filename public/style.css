@@ -250,3 +250,88 @@ form div {
 .cart-item h6 {
   margin: 15px;
 }
+
+.checkout {
+  background-color: whitesmoke;
+  border: 1px solid whitesmoke;
+  border-radius: 2px;
+  width: 570px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  box-shadow: 0px 0px 157px -27px rgba(0,0,0,0.75);
+}
+.checkout > h3 {
+  font-family: 'Luckiest Guy';
+  color: rgb(250, 32, 206);
+}
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.checkout-item h4 {
+  margin: 15px;
+}
+.checkout-promo {
+  margin: 2px;
+}
+.checkout-promo-submit button{
+  width: 70px;
+  height: 30px;
+  background-color: #ff0f83;
+  color: white;
+  font-family: 'Luckiest Guy';
+  font-size: 105%;
+  line-height: 30px;
+  cursor: pointer;
+  box-shadow: 0px 0px 14px -5px rgba(0,0,0,0.75);
+}
+.checkout-promo-submit button:hover,
+.checkout-promo-submit button:focus {
+  background-color: white;
+  color: rgb(79, 31, 252);
+  outline: none;
+}
+.checkout-address {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 65px;
+}
+.checkout-address input {
+  margin: 0 5px;
+}
+.checkout-address-street {
+  width: 300px;
+}
+.checkout-address-other {
+  margin-top: -5px;
+}
+.checkout-address-state {
+  width: 15px;
+}
+.checkout-address-zip {
+  width: 35px;
+}
+.checkout-submit {
+  width: 90px;
+  height: 60px;
+  background-color: #ff0f83;
+  color: white;
+  font-family: 'Luckiest Guy';
+  font-size: 105%;
+  line-height: 30px;
+  cursor: pointer;
+  box-shadow: 0px 0px 14px -5px rgba(0,0,0,0.75);
+  margin-left: auto;
+  margin-right: auto;
+}
+.checkout-submit:hover,
+.checkout-submit:focus {
+  background-color: white;
+  color: rgb(79, 31, 252);
+  outline: none;
+}
+.checkout h5 {
+  margin: 2px;
+}
