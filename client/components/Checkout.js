@@ -67,48 +67,64 @@ class Checkout extends Component {
       })
       const cartId = this.state.cart[0].id
       this.props.setPromo(cartId)
-      alert('You saved 50% off this order!')
     }
   }
 
   render() {
     const {cart, promoUsed} = this.state
     return !cart.length ? null : (
-      <div>
-        <h4>Your current shopping cart:</h4>
+      <div className="checkout">
+        <h3>Your current shopping cart:</h3>
         {cart.map(item => {
           return (
-            <div className='cart-item' key={item.id}>
-                  <ul>Product: {item.name} <br />
-                      Quantity: {item.quantity} <br />
-                      Price: ${(item.price/100).toFixed(2)} each<br />
-                      Subtotal: ${((item.quantity * item.price)/100).toFixed(2)} <br />
-                  </ul>
-                  </div>
-              )
+            <div
+              key={item.name}
+              className="checkout-item"
+            >
+              <h4>{item.name}</h4>
+              <h4>Quantity: {' ' + item.quantity}</h4>
+              <h4>
+                Subtotal: ${(item.price * item.quantity / 100).toFixed(2)}
+              </h4>
+            </div>
+          )
         })}
         <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
         {!promoUsed && (
-          <div>
+          <div className="checkout-promo">
             <form onSubmit={this.handlePromo}>
-              <label htmlFor="promo">Have a promo code?</label>
-              <input type="text" name="promo" />
-              <button type="submit">Apply</button>
+              <div className="checkout-promo-label">
+                <label htmlFor="promo">
+                  Have a promo code?
+                </label>
+              </div>
+              <div className="checkout-promo-input">
+                <input type="text" name="promo" />
+              </div>
+              <div className="checkout-promo-submit">
+                <button type="submit">Apply</button>
+              </div>
             </form>
           </div>
         )}
-        <h5>Please enter your shipping information:</h5>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="">Street Address</label>
-          <input type="text" />
-          <label htmlFor="">City</label>
-          <input type="text" />
-          <label htmlFor="">State</label>
-          <input type="text" />
-          <label htmlFor="">Zip</label>
-          <input type="text" />
-          <button type="submit">CONFIRM ORDER</button>
-        </form>
+        <div>
+          <h5>Please enter your shipping information:</h5>
+          <form onSubmit={this.handleSubmit} className="checkout-address">
+            <div>
+              <label htmlFor="">Street Address:</label>
+              <input type="text" className="checkout-address-street"/>
+            </div>
+            <div className="checkout-address-other">
+              <label htmlFor="">City:</label>
+              <input type="text" />
+              <label htmlFor="">State:</label>
+              <input type="text" className="checkout-address-state"/>
+              <label htmlFor="">Zip:</label>
+              <input type="text" className="checkout-address-zip"/>
+            </div>
+            <button className="checkout-submit" type="submit">CONFIRM ORDER</button>
+          </form>
+        </div>
       </div>
     )
   }
