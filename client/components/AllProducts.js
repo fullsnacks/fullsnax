@@ -26,6 +26,13 @@ class AllProducts extends Component {
   render() {
     const {products} = this.props
     const {filterText} = this.state
+    if (!products.length) {
+      return (
+        <div className='loading' style={{textAlign: 'center'}}>
+          <img src='/loading.gif' />
+        </div>
+      )
+    } else {
     return (
       products.length && (
         <div className="products">
@@ -43,7 +50,7 @@ class AllProducts extends Component {
             </div>
             <div className="products-search-select">
               <form onChange={this.handleChange}>
-                <label htmlFor="">Filter by category</label>
+                <label htmlFor="">Filter by category:</label>
                 <br />
                 <select name="" id="">
                   <option value="">All</option>
@@ -76,7 +83,7 @@ class AllProducts extends Component {
         </div>
       )
     )
-  }
+  }}
 }
 
 const mapStateToProps = state => ({

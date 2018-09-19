@@ -60,7 +60,6 @@ class SingleProduct extends Component {
             <p style={{fontStyle: 'italic'}}>{product.description}</p>
             <br />
             <p>Price: ${dollarPrice.toFixed(2)}</p>
-            <p>Stock: {product.inventory}</p>
             <p>Select Quantity:</p>
             <div className="single-product-card-select">
               <select
