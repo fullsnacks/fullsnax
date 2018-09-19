@@ -50,25 +50,41 @@ class SingleProduct extends Component {
 
     return (
       <div className="single-product">
-        <h1>{product.name}</h1>
-        <img src={product.imageUrl}/>
-        <p style={{fontStyle: 'italic'}}>{product.description}</p>
-        <br />
-        <p>Price: ${dollarPrice.toFixed(2)}</p>
-        <p>Stock: {product.inventory}</p>
-        <p>
-          Select Quantity:
-          <select name="quantity" onChange={this.handleChange}>
-            {inventoryArray().map(index => {
-              return (
-                <option value={index} key={index}>
-                  {index}
-                </option>
-              )
-            })}
-          </select>
-        </p>
-        <button onClick={this.handleSubmit}>Add to cart</button>
+        <div className="single-product-card">
+          <div className="single-product-card-left">
+            <h1>{product.name}</h1>
+            <img src={product.imageUrl}/>
+          </div>
+          <div className="single-product-card-right">
+            <h4>About:</h4>
+            <p style={{fontStyle: 'italic'}}>{product.description}</p>
+            <br />
+            <p>Price: ${dollarPrice.toFixed(2)}</p>
+            <p>Stock: {product.inventory}</p>
+            <p>Select Quantity:</p>
+            <div className="single-product-card-select">
+              <select
+                name="quantity"
+                onChange={this.handleChange}
+              >
+                {inventoryArray().map(index => {
+                  return (
+                    <option value={index} key={index}>
+                      {index}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+            <br/>
+            <button
+              onClick={this.handleSubmit}
+              className="single-product-card-add"
+            >
+              Add to cart
+            </button>
+          </div>
+        </div>
       </div>
     )
   }

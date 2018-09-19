@@ -131,6 +131,38 @@ form div {
 
 .single-product {
   text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.single-product-card {
+  background-color: whitesmoke;
+  border: 1px solid whitesmoke;
+  border-radius: 15px;
+  height: 500px;
+  width: 570px;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0px 0px 157px -27px rgba(0,0,0,0.75);
+}
+
+.single-product-card-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+}
+
+.single-product-card-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.single-product-card-right h4 {
+  font-family: 'Luckiest Guy';
+  margin-top: 50px;
+  margin-bottom: 0px;
 }
 
 .single-product img {
@@ -138,9 +170,61 @@ form div {
   max-height: 350px;
 }
 
+.single-product-card p {
+  margin: 3px;
+}
+
 .single-product h1 {
   font-family: 'Luckiest Guy';
+  color: darkblue;
   margin-bottom: 0;
+}
+
+.single-product-card-select {
+  position: relative;
+  background-color: #e6e6e6;
+  width: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  border-radius: 2px;
+}
+
+.single-product-card-select select {
+  font-family: "helvetica neue", helvetica;
+  font-size: 1rem;
+  font-weight: 200;
+  max-width: 100%;
+  padding: 8px 24px 8px 10px;
+  border: none;
+  background-color: transparent;
+  appearance: none;
+}
+
+.single-product-card-select select:active,
+.single-product-card-select select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.single-product-card-add {
+  width: 100px;
+  height: 50px;
+  background-color: #ff0f83;
+  color: white;
+  font-family: 'Luckiest Guy';
+  font-size: 110%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.single-product-card-add:hover,
+.single-product-card-add:focus {
+  background-color: orange;
+  color: #c60057;
+  outline: none;
 }
 
 .home {
