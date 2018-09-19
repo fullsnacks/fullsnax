@@ -112,15 +112,15 @@ class Checkout extends Component {
           <form onSubmit={this.handleSubmit} className="checkout-address">
             <div>
               <label htmlFor="">Street Address:</label>
-              <input type="text" className="checkout-address-street"/>
+              <input type="text" className="checkout-address-street" required/>
             </div>
             <div className="checkout-address-other">
               <label htmlFor="">City:</label>
-              <input type="text" />
+              <input type="text" required/>
               <label htmlFor="">State:</label>
-              <input type="text" className="checkout-address-state"/>
+              <input type="text" className="checkout-address-state" required/>
               <label htmlFor="">Zip:</label>
-              <input type="text" className="checkout-address-zip"/>
+              <input type="text" className="checkout-address-zip" required/>
             </div>
             <button className="checkout-submit" type="submit">CONFIRM ORDER</button>
           </form>
