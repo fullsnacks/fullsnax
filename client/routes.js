@@ -12,7 +12,8 @@ import {
   Cart,
   Home,
   Checkout,
-  OrderComplete
+  OrderComplete,
+  NoMatch
 } from './components'
 import {me} from './store'
 import SingleProduct from './components/SingleProduct'
@@ -37,7 +38,6 @@ class Routes extends Component {
         <Route path="/users/:userId" component={SingleUser} />
         <Route path="/users" component={Users} />
         <Route path="/products" component={AllProducts} />
-        {/* obviously remove the cart route in production */}
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/orderComplete" component={OrderComplete} />
@@ -49,7 +49,8 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        {/* <Route component={Login} /> */}
+        <Route component={NoMatch} />
       </Switch>
     )
   }
