@@ -72,21 +72,19 @@ class Cart extends Component {
             <h4>Your current shopping cart:</h4>
             {cart.map(item => {
               return (
-                <div
-                  key={item.name}
-                  style={{display: 'flex', border: '1px solid black'}}
-                >
-                  <h6 style={{margin: '15px'}}>{item.name}</h6>
-                  <div style={{textAlign: 'center'}}>
-                    <h6 style={{margin: '15px'}}>Quantity:{item.quantity}</h6>
-                    <button onClick={() => this.handleDelete(item.saleId)}>
-                      Delete
-                    </button>
+                <div className='cart-item' key={item.id}>
+                  <ul>Product: {item.name} <br />
+                      Quantity: {item.quantity} <br />
+                      Price: ${(item.price/100).toFixed(2)} each<br />
+                      Subtotal: ${((item.quantity * item.price)/100).toFixed(2)} <br />
+                  <button onClick={() => this.handleDelete(item.saleId)}>
+                    Delete {item.name}
+                  </button>
+                  </ul>
                   </div>
-                </div>
               )
             })}
-            <h2>Your total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
+            <h2>Your Total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
             <Link to="/checkout">
               <button>GO TO CHECKOUT</button>
             </Link>
