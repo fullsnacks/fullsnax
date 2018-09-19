@@ -4,12 +4,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-// const logoStyle = {
-
-// }
-
-const tempCartStyle = {}
-
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="navbar">
     <ul>

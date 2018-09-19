@@ -2,11 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct, makeSale} from '../store/products'
 
-const imgStyle = {
-  maxWidth: '400px',
-  maxHeight: '400px'
-}
-
 class SingleProduct extends Component {
   constructor(props) {
     super(props)
@@ -56,7 +51,7 @@ class SingleProduct extends Component {
     return (
       <div className="single-product">
         <h1>{product.name}</h1>
-        <img src={product.imageUrl} style={imgStyle} />
+        <img src={product.imageUrl}/>
         <p style={{fontStyle: 'italic'}}>{product.description}</p>
         <br />
         <p>Price: ${dollarPrice.toFixed(2)}</p>
