@@ -246,3 +246,7 @@ form div {
 .loading {
   text-align: 'center'
 }
+
+.cart-item h6 {
+  margin: 15px;
+}
