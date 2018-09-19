@@ -95,7 +95,7 @@ class Cart extends Component {
                 </div>
                 <div className="cart-item-delete">
                   <button onClick={() => this.handleDelete(item.saleId)}>
-                    Delete {item.name}
+                    Delete
                   </button>
                 </div>
               </div>
