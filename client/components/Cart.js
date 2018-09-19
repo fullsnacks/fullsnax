@@ -8,7 +8,8 @@ class Cart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cart: []
+      cart: [],
+      loading: true
     }
     this.getCartTotal = this.getCartTotal.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
@@ -36,6 +37,14 @@ class Cart extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.state.loading) {
+    this.setState({
+      loading: false
+    })
+    }
+  }
+
   async handleDelete(id) {
     await this.props.deleteSale(id)
     if (this.props.user.id) {
@@ -54,49 +63,56 @@ class Cart extends Component {
 
   render() {
     const {cart} = this.state
-    if (!cart) {
+    if (!cart.length && this.state.loading) {
       return (
         <div className='loading'>
           <img src='/loading.gif'></img>
         </div>
       )
-    } else if (!cart.length) {
+    }
+    else if (!cart.length && !this.state.loading) {
       return (
         <div style={{textAlign: 'center'}}>
           <img src="/cookieMonster.jpg" />
         </div>
       )
-    } else {
+    }
+    else if (cart.length) {
+      this.state.loading === true;
       return (
-          <div className="cart">
-            <h4>Your current shopping cart:</h4>
-            {cart.map(item => {
-              return (
-                <div className='cart-item' key={item.id}>
-                  <div className="cart-item-text">
-                    <ul>
-                      <li>Product: {item.name}</li>
-                      <li>Quantity: {item.quantity}</li>
-                      <li>Price: ${(item.price/100).toFixed(2)} each</li>
-                      <li>Subtotal: ${((item.quantity * item.price)/100).toFixed(2)}</li>
-                    </ul>
-                  </div>
-                  <div className="cart-item-delete">
-                    <button onClick={() => this.handleDelete(item.saleId)}>
-                      Delete {item.name}
-                    </button>
-                  </div>
+        <div className="cart">
+          <h4>Your current shopping cart:</h4>
+          {cart.map(item => {
+            return (
+              <div className='cart-item' key={item.id}>
+                <div className="cart-item-text">
+                  <ul>
+                    <li>Product: {item.name}</li>
+                    <li>Quantity: {item.quantity}</li>
+                    <li>Price: ${(item.price/100).toFixed(2)} each</li>
+                    <li>Subtotal: ${((item.quantity * item.price)/100).toFixed(2)}</li>
+                  </ul>
                 </div>
-              )
-            })}
-            <h2>Your Total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
-            <Link to="/checkout">
-              <button className="cart-to-checkout">GO TO CHECKOUT</button>
-            </Link>
-          </div>
-        )
-      }
-  }
+                <div className="cart-item-delete">
+                  <button onClick={() => this.handleDelete(item.saleId)}>
+                    Delete {item.name}
+                  </button>
+                </div>
+              </div>
+            )
+          })}
+          <h2>Your Total: ${(this.getCartTotal(cart) / 100).toFixed(2)}</h2>
+          <Link to="/products">
+              <button className="cart-to-products">CONTINUE SHOPPING</button>
+          </Link>
+          <Link to="/checkout">
+            <button className="cart-to-checkout">GO TO CHECKOUT</button>
+          </Link>
+        </div>
+      )
+    }
+
+    }
 }
 
 const mapStateToProps = state => ({

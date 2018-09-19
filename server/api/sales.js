@@ -22,7 +22,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const {quantity, purchasePrice, productId} = req.body
+    let {quantity, purchasePrice, productId} = req.body
     if (!req.session.guestId) {
       req.session.guestId = req.sessionID
     }
