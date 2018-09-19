@@ -466,3 +466,25 @@ form div {
   color: black;
   font-size: 105%;
 }
+
+.past-orders {
+  background-color: whitesmoke;
+  border: 1px solid whitesmoke;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.past-orders h2 {
+  font-family: 'Luckiest Guy'
+}
+
+.past-orders li {
+  list-style: none;
+  text-align: left;
+}
+
+.past-orders p {
+  margin: 1px;
+}
