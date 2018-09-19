@@ -107,10 +107,10 @@ const products = [
     inventory: 30,
     description: 'Sweden is famous for these boneless, red fish.',
     category: 'candy',
-    imageUrl: '/productImgs/welchs.png'
+    imageUrl: '/productImgs/swedish.png'
   },
   {
-    name: 'Chocolate Chip Cookies',
+    name: 'ChocoChip Cookies',
     price: 500,
     inventory: 130,
     description:
