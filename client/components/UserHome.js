@@ -40,29 +40,32 @@ class UserHome extends Component {
     }
 
     return (
-      <div>
+      <div className="past-orders">
         <h2>Welcome back, {user.firstName}!</h2>
         <h3>Past Orders:</h3>
+        <hr/>
         {orders.map((order, index) => {
           return (
             <div key={order.id}>
               <p>
                 <b>Order #{index + 1}</b>
+                <p>Confirmation ID: {order.id}</p>
               </p>
               <p>Placed on: {order.updatedAt}</p>
               <p>Total: ${(getTotal(order) / 100).toFixed(2)}</p>
               {order.sales.map(sale => {
                 return (
                   <ul key={sale.id}>
-                    Product: {sale.product.name} <br />
-                    Quantity: {sale.quantity} <br />
-                    Purchase Price: ${(sale.purchasePrice / 100).toFixed(
+                    <li>Product: {sale.product.name}</li>
+                    <li>Quantity: {sale.quantity}</li>
+                    <li>Purchase Price: ${(sale.purchasePrice / 100).toFixed(
                       2
                     )}{' '}
-                    each
+                    each</li>
                   </ul>
                 )
               })}
+              <hr/>
             </div>
           )
         })}
